@@ -42,3 +42,10 @@ class ArtworkControllerTest {
         inOrder.verify(mockRepository).save(artwork);
         inOrder.verify(mockView).artworkAdded(artwork);
     }
+    @Test void testAddArtworkWhenAlreadyExistingShowsError() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        when(mockRepository.findById(artwork.getId())).thenReturn(Optional.of(artwork));
+        controller.addArtwork(artwork);
+        verify(mockView).showError("Already existing artwork with id " + artwork.getId(), artwork);
+        verifyNoMoreInteractions(mockView);
+    }
