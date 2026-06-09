@@ -216,3 +216,6 @@ public class ArtGalleryFrameTest {
         assertThat(frame.artistTextField.getText()).isEmpty();
         assertThat(frame.priceTextField.getText()).isEmpty();
     }
+    @Test public void testListModelEmpty() {
+        assertThat(frame.listModel.getSize()).isZero();
+    }
