@@ -89,3 +89,10 @@ class CategoryTest {
 		category2.setDescription("Desc2");
 		assertThat(category1).isNotEqualTo(category2);
 	}
+	@Test
+	@DisplayName("Should have toString representation")
+	void testToString() {
+		Category category = new Category("Impressionism");
+		String str = category.toString();
+		assertThat(str).contains("Impressionism");
+	}
