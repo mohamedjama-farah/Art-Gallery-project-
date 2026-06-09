@@ -170,3 +170,12 @@ class ArtworkTest {
 		Artwork artwork = new Artwork("Test", "Artist", 100.0);
 		assertThat(artwork).isEqualTo(artwork);
 	}
+	@Test
+	@DisplayName("Should handle boundary year values")
+	void testBoundaryYears() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		artwork.setYear(1000);
+		assertThat(artwork.getYear()).isEqualTo(1000);
+		artwork.setYear(2100);
+		assertThat(artwork.getYear()).isEqualTo(2100);
+	}
