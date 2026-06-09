@@ -276,3 +276,7 @@ public class ArtGalleryFrameTest {
         assertThat(frame.priceTextField.getText()).isEmpty();
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testFrameSize() {
+        assertThat(frame.getWidth()).isEqualTo(600);
+        assertThat(frame.getHeight()).isEqualTo(400);
+    }
