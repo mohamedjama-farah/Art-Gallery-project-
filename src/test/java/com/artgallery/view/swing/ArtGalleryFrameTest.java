@@ -337,3 +337,9 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("   ");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testFieldValidationMixed() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("   ");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
