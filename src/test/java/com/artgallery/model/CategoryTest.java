@@ -59,3 +59,12 @@ class CategoryTest {
 		Category category2 = new Category("Modern Art");
 		assertThat(category1).isNotEqualTo(category2);
 	}
+	@Test
+	@DisplayName("Should handle hashCode correctly")
+	void testHashCode() {
+		Category category1 = new Category("Impressionism");
+		category1.setDescription("Desc1");
+		Category category2 = new Category("Impressionism");
+		category2.setDescription("Desc1");
+		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
+	}
