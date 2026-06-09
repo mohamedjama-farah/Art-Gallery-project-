@@ -280,3 +280,6 @@ public class ArtGalleryFrameTest {
         assertThat(frame.getWidth()).isEqualTo(600);
         assertThat(frame.getHeight()).isEqualTo(400);
     }
+    @Test public void testFrameTitle() {
+        assertThat(frame.getTitle()).isEqualTo("Art Gallery Management System");
+    }
