@@ -154,3 +154,10 @@ class CategoryControllerTest {
 
         verify(mockRepository).update(category);
     }
+    @Test
+    void testAddNullIdThrowsException() {
+        assertThatThrownBy(() -> controller.addCategory(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("Category cannot be null");
+    }
+}
