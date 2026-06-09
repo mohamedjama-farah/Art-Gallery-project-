@@ -325,3 +325,9 @@ public class ArtGalleryFrameTest {
         frame.showError("Error 2", null);
         assertThat(frame.errorLabel.getText()).contains("Error 2");
     }
+    @Test public void testFieldValidationAllEmpty() {
+        frame.titleTextField.setText("");
+        frame.artistTextField.setText("");
+        frame.priceTextField.setText("");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
