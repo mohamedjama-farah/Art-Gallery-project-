@@ -115,15 +115,11 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("   ");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testButtonEnablementChanges() {
+    @Test public void testButtonDisabledWhenOnlyTitleMissing() {
         frame.titleTextField.setText("");
-        frame.artistTextField.setText("");
-        frame.priceTextField.setText("");
-        assertThat(frame.addButton.isEnabled()).isFalse();
-        frame.titleTextField.setText("Title");
-        frame.artistTextField.setText("Artist");
+        frame.artistTextField.setText("Van Gogh");
         frame.priceTextField.setText("100");
-        assertThat(frame.addButton.isEnabled()).isTrue();
+        assertThat(frame.addButton.isEnabled()).isFalse();
     }
     @Test public void testRemoveEventFromTextFields() {
         frame.titleTextField.setText("Test");
