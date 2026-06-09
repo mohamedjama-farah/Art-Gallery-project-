@@ -48,3 +48,12 @@ class MongoArtworkRepositoryIT {
 		singleParamRepo.save(artwork);
 		assertThat(artwork.getId()).isNotNull();
 	}
+	@Test
+	@DisplayName("Should throw exception when updating with invalid ID format")
+	void testUpdateWithInvalidIdFormat() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		artwork.setId("not-a-valid-objectid");
+		assertThatThrownBy(() -> repository.update(artwork))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Invalid ID format: not-a-valid-objectid");
+	}
