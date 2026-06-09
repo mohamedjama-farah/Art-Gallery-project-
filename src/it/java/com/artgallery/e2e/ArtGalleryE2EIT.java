@@ -49,3 +49,9 @@ class ArtGalleryE2EIT {
         artworkController.addArtwork(new Artwork("The Kiss", "Klimt", 2000.0));
         assertThat(artworkController.getAllArtworks()).hasSize(2);
     }
+    @Test void testDeleteArtwork() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        artworkController.addArtwork(artwork);
+        artworkController.deleteArtwork(artwork.getId());
+        assertThat(artworkController.getAllArtworks()).isEmpty();
+    }
