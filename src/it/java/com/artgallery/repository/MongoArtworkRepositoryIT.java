@@ -153,3 +153,9 @@ class MongoArtworkRepositoryIT {
 		assertThatThrownBy(() -> repository.save(null))
 			.isInstanceOf(NullPointerException.class);
 	}
+	@Test
+	@DisplayName("Should find null ID throws exception")
+	void testFindNullId() {
+		assertThatThrownBy(() -> repository.findById(null))
+			.isInstanceOf(NullPointerException.class);
+	}
