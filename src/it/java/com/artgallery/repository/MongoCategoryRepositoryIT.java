@@ -228,3 +228,14 @@ class MongoCategoryRepositoryIT {
 		assertThat(all).hasSize(3);
 		assertThat(all).extracting(Category::getName).contains("Cat1", "Cat2", "Cat3");
 	}
+	@Test
+	@DisplayName("Should handle category name case sensitivity")
+	void testCategoryNameCaseSensitivity() {
+		Category category = new Category("TestCategory");
+		repository.save(category);
+
+		Category found = repository.findById(category.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getName()).isEqualTo("TestCategory");
+	}
+}
