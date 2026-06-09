@@ -80,3 +80,13 @@ class ArtGalleryE2EIT {
         Category retrieved = categoryController.getCategoryById(category.getId());
         assertThat(retrieved.getName()).isEqualTo("Painting");
     }
+    @Test void testCompleteCategoryWorkflow() {
+        Category c1 = new Category("Modern Art");
+        Category c2 = new Category("Classical Art");
+        categoryController.addCategory(c1);
+        categoryController.addCategory(c2);
+        assertThat(categoryController.getAllCategories()).hasSize(2);
+        categoryController.deleteCategory(c2.getId());
+        assertThat(categoryController.getAllCategories()).hasSize(1);
+    }
+}
