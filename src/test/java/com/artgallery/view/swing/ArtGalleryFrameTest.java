@@ -252,3 +252,13 @@ public class ArtGalleryFrameTest {
         frame.showError("New error", artwork);
         assertThat(frame.errorLabel.getText()).contains("New error").contains("Test");
     }
+    @Test public void testButtonStatesWithPartialInput() {
+        frame.titleTextField.setText("Title");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.artistTextField.setText("Artist");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
