@@ -137,3 +137,7 @@ public class ArtGalleryFrameTest {
         frame.titleTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testShowErrorWithNullTitle() {
+        frame.showError("Error", null);
+        assertThat(frame.errorLabel.getText()).isEqualTo("Error");
+    }
