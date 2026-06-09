@@ -62,3 +62,14 @@ class ArtGalleryE2EIT {
         artworkController.updateArtwork(artwork);
         assertThat(artworkController.getArtworkById(artwork.getId()).getDescription()).isEqualTo("Updated");
     }
+    @Test void testCompleteArtworkWorkflow() {
+        Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        Artwork a2 = new Artwork("Persistence", "Dali", 2000.0);
+        Artwork a3 = new Artwork("The Kiss", "Klimt", 3000.0);
+        artworkController.addArtwork(a1);
+        artworkController.addArtwork(a2);
+        artworkController.addArtwork(a3);
+        assertThat(artworkController.getAllArtworks()).hasSize(3);
+        artworkController.deleteArtwork(a2.getId());
+        assertThat(artworkController.getAllArtworks()).hasSize(2);
+    }
