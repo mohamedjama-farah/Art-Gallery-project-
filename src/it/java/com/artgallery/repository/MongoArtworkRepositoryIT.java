@@ -147,3 +147,9 @@ class MongoArtworkRepositoryIT {
 		assertThat(updated).isNotNull();
 		assertThat(updated.getDescription()).isEqualTo("Updated description");
 	}
+	@Test
+	@DisplayName("Should save null artwork throws exception")
+	void testSaveNullArtwork() {
+		assertThatThrownBy(() -> repository.save(null))
+			.isInstanceOf(NullPointerException.class);
+	}
