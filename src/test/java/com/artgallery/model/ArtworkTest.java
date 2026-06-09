@@ -106,3 +106,9 @@ class ArtworkTest {
 		artwork2.setYear(1889);
 		assertThat(artwork1.hashCode()).isEqualTo(artwork2.hashCode());
 	}
+	@Test
+	@DisplayName("Should not be equal to null")
+	void testEqualityWithNull() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		assertThat(artwork).isNotEqualTo(null);
+	}
