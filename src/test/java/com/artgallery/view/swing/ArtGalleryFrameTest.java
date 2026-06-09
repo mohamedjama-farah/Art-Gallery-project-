@@ -175,3 +175,12 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("  100.0  ");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testFrameInitializesWithCorrectComponents() {
+        assertThat(frame.artworkList).isNotNull();
+        assertThat(frame.addButton).isNotNull();
+        assertThat(frame.deleteButton).isNotNull();
+        assertThat(frame.errorLabel).isNotNull();
+        assertThat(frame.titleTextField).isNotNull();
+        assertThat(frame.artistTextField).isNotNull();
+        assertThat(frame.priceTextField).isNotNull();
+    }
