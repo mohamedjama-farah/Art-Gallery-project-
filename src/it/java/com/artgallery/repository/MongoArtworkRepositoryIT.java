@@ -183,3 +183,9 @@ class MongoArtworkRepositoryIT {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("Invalid ID format: not-a-valid-id");
 	}
+	@Test
+	@DisplayName("Should handle empty list when no artworks exist")
+	void testFindAllWhenEmpty() {
+		List<Artwork> artworks = repository.findAll();
+		assertThat(artworks).isEmpty();
+	}
