@@ -34,3 +34,11 @@ class ArtworkControllerTest {
         controller.allArtworks();
         verify(mockView).showAllArtworks(list);
     }
+    @Test void testAddArtworkWhenNotExistingSavesAndNotifiesView() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        when(mockRepository.findById(artwork.getId())).thenReturn(Optional.empty());
+        controller.addArtwork(artwork);
+        InOrder inOrder = inOrder(mockRepository, mockView);
+        inOrder.verify(mockRepository).save(artwork);
+        inOrder.verify(mockView).artworkAdded(artwork);
+    }
