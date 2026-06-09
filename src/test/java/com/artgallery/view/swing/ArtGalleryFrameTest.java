@@ -14,37 +14,37 @@ import com.artgallery.model.Artwork;
 public class ArtGalleryFrameTest {
     private ArtGalleryFrame frame;
     private ArtworkController mockController;
-    @BeforeEach public void setUp() {
+    @BeforeEach void setUp() {
         mockController = mock(ArtworkController.class);
         doNothing().when(mockController).addArtwork(new Artwork("Test", "Test", 0.0));
         frame = new ArtGalleryFrame();
         frame.setController(mockController);
     }
-    @Test public void testAddButtonIsDisabledWhenFieldsAreEmpty() {
+    @Test void testAddButtonIsDisabledWhenFieldsAreEmpty() {
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testAddButtonIsEnabledWhenAllFieldsFilled() {
+    @Test void testAddButtonIsEnabledWhenAllFieldsFilled() {
         frame.titleTextField.setText("Starry Night");
         frame.artistTextField.setText("Van Gogh");
         frame.priceTextField.setText("1000.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testAddButtonDisabledWhenTitleEmpty() {
+    @Test void testAddButtonDisabledWhenTitleEmpty() {
         frame.artistTextField.setText("Van Gogh");
         frame.priceTextField.setText("1000.0");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testAddButtonDisabledWhenArtistEmpty() {
+    @Test void testAddButtonDisabledWhenArtistEmpty() {
         frame.titleTextField.setText("Starry Night");
         frame.priceTextField.setText("1000.0");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testAddButtonDisabledWhenPriceEmpty() {
+    @Test void testAddButtonDisabledWhenPriceEmpty() {
         frame.titleTextField.setText("Starry Night");
         frame.artistTextField.setText("Van Gogh");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testShowAllArtworksPopulatesList() {
+    @Test void testShowAllArtworksPopulatesList() {
         Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
         Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
         frame.showAllArtworks(Arrays.asList(a1, a2));
@@ -52,28 +52,28 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.get(0)).contains("Starry Night");
         assertThat(frame.listModel.get(1)).contains("The Kiss");
     }
-    @Test public void testArtworkAddedAppendsToList() {
+    @Test void testArtworkAddedAppendsToList() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.artworkAdded(artwork);
         assertThat(frame.listModel.size()).isEqualTo(1);
         assertThat(frame.listModel.get(0)).contains("Starry Night");
     }
-    @Test public void testArtworkRemovedRemovesFromList() {
+    @Test void testArtworkRemovedRemovesFromList() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.artworkAdded(artwork);
         frame.artworkRemoved(artwork);
         assertThat(frame.listModel.size()).isZero();
     }
-    @Test public void testShowErrorDisplaysMessage() {
+    @Test void testShowErrorDisplaysMessage() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.showError("Already existing", artwork);
         assertThat(frame.errorLabel.getText()).contains("Already existing");
     }
-    @Test public void testShowErrorWithoutArtwork() {
+    @Test void testShowErrorWithoutArtwork() {
         frame.showError("Error message", null);
         assertThat(frame.errorLabel.getText()).isEqualTo("Error message");
     }
-    @Test public void testClearFieldsAfterArtworkAdded() {
+    @Test void testClearFieldsAfterArtworkAdded() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.titleTextField.setText("Starry Night");
         frame.artistTextField.setText("Van Gogh");
@@ -83,43 +83,43 @@ public class ArtGalleryFrameTest {
         assertThat(frame.artistTextField.getText()).isEmpty();
         assertThat(frame.priceTextField.getText()).isEmpty();
     }
-    @Test public void testShowAllArtworksEmptyList() {
+    @Test void testShowAllArtworksEmptyList() {
         frame.showAllArtworks(Arrays.asList());
         assertThat(frame.listModel.size()).isZero();
     }
-    @Test public void testMultipleArtworksAdded() {
+    @Test void testMultipleArtworksAdded() {
         Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
         Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
         frame.artworkAdded(a1);
         frame.artworkAdded(a2);
         assertThat(frame.listModel.size()).isEqualTo(2);
     }
-    @Test public void testErrorLabelClearedAfterArtworkAdded() {
+    @Test void testErrorLabelClearedAfterArtworkAdded() {
         frame.errorLabel.setText("Some error");
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.artworkAdded(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
-    @Test public void testErrorLabelClearedAfterArtworkRemoved() {
+    @Test void testErrorLabelClearedAfterArtworkRemoved() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.artworkAdded(artwork);
         frame.errorLabel.setText("Some error");
         frame.artworkRemoved(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
-    @Test public void testButtonEnableStateWithWhitespaceOnly() {
+    @Test void testButtonEnableStateWithWhitespaceOnly() {
         frame.titleTextField.setText("   ");
         frame.artistTextField.setText("   ");
         frame.priceTextField.setText("   ");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testButtonDisabledWhenOnlyTitleMissing() {
-        frame.titleTextField.setText("");
-        frame.artistTextField.setText("Van Gogh");
+    @Test void testButtonDisabledWhenOnlyArtistMissing() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("");
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testRemoveEventFromTextFields() {
+    @Test void testRemoveEventFromTextFields() {
         frame.titleTextField.setText("Test");
         frame.artistTextField.setText("Test");
         frame.priceTextField.setText("100");
@@ -128,24 +128,24 @@ public class ArtGalleryFrameTest {
         frame.titleTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testShowErrorWithNullTitle() {
+    @Test void testShowErrorWithNullTitle() {
         frame.showError("Error", null);
         assertThat(frame.errorLabel.getText()).isEqualTo("Error");
     }
-    @Test public void testArtworkAddedUpdatesErrorLabel() {
+    @Test void testArtworkAddedUpdatesErrorLabel() {
         frame.errorLabel.setText("Previous error");
         Artwork artwork = new Artwork("Test", "Artist", 100.0);
         frame.artworkAdded(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
-    @Test public void testShowAllArtworksWithMultipleArtworks() {
+    @Test void testShowAllArtworksWithMultipleArtworks() {
         Artwork a1 = new Artwork("A1", "Artist1", 100.0);
         Artwork a2 = new Artwork("A2", "Artist2", 200.0);
         Artwork a3 = new Artwork("A3", "Artist3", 300.0);
         frame.showAllArtworks(Arrays.asList(a1, a2, a3));
         assertThat(frame.listModel.size()).isEqualTo(3);
     }
-    @Test public void testSelectAndRemoveArtwork() {
+    @Test void testSelectAndRemoveArtwork() {
         Artwork a1 = new Artwork("A1", "Artist1", 100.0);
         Artwork a2 = new Artwork("A2", "Artist2", 200.0);
         frame.artworkAdded(a1);
@@ -154,19 +154,19 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.size()).isEqualTo(1);
         assertThat(frame.listModel.get(0)).contains("A2");
     }
-    @Test public void testAddButtonDisabledWhenPriceContainsText() {
+    @Test void testAddButtonDisabledWhenPriceContainsText() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("Artist");
         frame.priceTextField.setText("0.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testAddButtonWithTrimmedWhitespace() {
+    @Test void testAddButtonWithTrimmedWhitespace() {
         frame.titleTextField.setText("  Title  ");
         frame.artistTextField.setText("  Artist  ");
         frame.priceTextField.setText("  100.0  ");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testFrameInitializesWithCorrectComponents() {
+    @Test void testFrameInitializesWithCorrectComponents() {
         assertThat(frame.artworkList).isNotNull();
         assertThat(frame.addButton).isNotNull();
         assertThat(frame.deleteButton).isNotNull();
@@ -175,13 +175,13 @@ public class ArtGalleryFrameTest {
         assertThat(frame.artistTextField).isNotNull();
         assertThat(frame.priceTextField).isNotNull();
     }
-    @Test public void testShowAllArtworksWithSingleArtwork() {
+    @Test void testShowAllArtworksWithSingleArtwork() {
         Artwork a1 = new Artwork("Solo", "Artist", 150.0);
         frame.showAllArtworks(Arrays.asList(a1));
         assertThat(frame.listModel.size()).isEqualTo(1);
         assertThat(frame.listModel.get(0)).contains("Solo");
     }
-    @Test public void testAddMultipleArtworksSequentially() {
+    @Test void testAddMultipleArtworksSequentially() {
         Artwork a1 = new Artwork("A1", "A1", 100.0);
         Artwork a2 = new Artwork("A2", "A2", 200.0);
         Artwork a3 = new Artwork("A3", "A3", 300.0);
@@ -190,27 +190,27 @@ public class ArtGalleryFrameTest {
         frame.artworkAdded(a3);
         assertThat(frame.listModel.size()).isEqualTo(3);
     }
-    @Test public void testErrorLabelInitiallyBlank() {
+    @Test void testErrorLabelInitiallyBlank() {
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
-    @Test public void testListSelectionMode() {
+    @Test void testListSelectionMode() {
         assertThat(frame.artworkList.getSelectionMode()).isZero(); // SINGLE_SELECTION = 0
     }
-    @Test public void testSetControllerCallsAllArtworks() {
+    @Test void testSetControllerCallsAllArtworks() {
         verify(mockController).allArtworks();
     }
-    @Test public void testAddButtonInitiallyDisabled() {
+    @Test void testAddButtonInitiallyDisabled() {
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testAllTextFieldsEmpty() {
+    @Test void testAllTextFieldsEmpty() {
         assertThat(frame.titleTextField.getText()).isEmpty();
         assertThat(frame.artistTextField.getText()).isEmpty();
         assertThat(frame.priceTextField.getText()).isEmpty();
     }
-    @Test public void testListModelEmpty() {
+    @Test void testListModelEmpty() {
         assertThat(frame.listModel.getSize()).isZero();
     }
-    @Test public void testAddAndRemoveMultiple() {
+    @Test void testAddAndRemoveMultiple() {
         Artwork a1 = new Artwork("A1", "Artist1", 100.0);
         Artwork a2 = new Artwork("A2", "Artist2", 200.0);
         Artwork a3 = new Artwork("A3", "Artist3", 300.0);
@@ -225,7 +225,7 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.get(0)).contains("A1");
         assertThat(frame.listModel.get(1)).contains("A3");
     }
-    @Test public void testShowAllArtworksClearsExisting() {
+    @Test void testShowAllArtworksClearsExisting() {
         Artwork a1 = new Artwork("A1", "Artist1", 100.0);
         frame.artworkAdded(a1);
         assertThat(frame.listModel.getSize()).isEqualTo(1);
@@ -237,13 +237,13 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.get(0)).contains("A2");
         assertThat(frame.listModel.get(1)).contains("A3");
     }
-    @Test public void testErrorLabelUpdatesCorrectly() {
+    @Test void testErrorLabelUpdatesCorrectly() {
         frame.errorLabel.setText("Old error");
         Artwork artwork = new Artwork("Test", "Artist", 100.0);
         frame.showError("New error", artwork);
         assertThat(frame.errorLabel.getText()).contains("New error").contains("Test");
     }
-    @Test public void testButtonStatesWithPartialInput() {
+    @Test void testButtonStatesWithPartialInput() {
         frame.titleTextField.setText("Title");
         assertThat(frame.addButton.isEnabled()).isFalse();
 
@@ -253,7 +253,7 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testClearAllFields() {
+    @Test void testClearAllFields() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("Artist");
         frame.priceTextField.setText("100");
@@ -267,42 +267,42 @@ public class ArtGalleryFrameTest {
         assertThat(frame.priceTextField.getText()).isEmpty();
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testFrameSize() {
+    @Test void testFrameSize() {
         assertThat(frame.getWidth()).isEqualTo(600);
         assertThat(frame.getHeight()).isEqualTo(400);
     }
-    @Test public void testFrameTitle() {
+    @Test void testFrameTitle() {
         assertThat(frame.getTitle()).isEqualTo("Art Gallery Management System");
     }
-    @Test public void testAddButtonName() {
+    @Test void testAddButtonName() {
         assertThat(frame.addButton.getName()).isEqualTo("addButton");
     }
-    @Test public void testDeleteButtonName() {
+    @Test void testDeleteButtonName() {
         assertThat(frame.deleteButton.getName()).isEqualTo("deleteButton");
     }
-    @Test public void testTitleTextFieldName() {
+    @Test void testTitleTextFieldName() {
         assertThat(frame.titleTextField.getName()).isEqualTo("titleTextField");
     }
-    @Test public void testArtistTextFieldName() {
+    @Test void testArtistTextFieldName() {
         assertThat(frame.artistTextField.getName()).isEqualTo("artistTextField");
     }
-    @Test public void testPriceTextFieldName() {
+    @Test void testPriceTextFieldName() {
         assertThat(frame.priceTextField.getName()).isEqualTo("priceTextField");
     }
-    @Test public void testArtworkListName() {
+    @Test void testArtworkListName() {
         assertThat(frame.artworkList.getName()).isEqualTo("artworkList");
     }
-    @Test public void testErrorLabelName() {
+    @Test void testErrorLabelName() {
         assertThat(frame.errorLabel.getName()).isEqualTo("errorLabel");
     }
-    @Test public void testMultipleArtworksWithSameTitle() {
+    @Test void testMultipleArtworksWithSameTitle() {
         Artwork a1 = new Artwork("Same", "Artist1", 100.0);
         Artwork a2 = new Artwork("Same", "Artist2", 200.0);
         frame.artworkAdded(a1);
         frame.artworkAdded(a2);
         assertThat(frame.listModel.getSize()).isEqualTo(2);
     }
-    @Test public void testRemoveArtworkByContent() {
+    @Test void testRemoveArtworkByContent() {
         Artwork a = new Artwork("Test", "Artist", 100.0);
         frame.artworkAdded(a);
         String item = frame.listModel.get(0);
@@ -310,45 +310,45 @@ public class ArtGalleryFrameTest {
         frame.artworkRemoved(a);
         assertThat(frame.listModel.getSize()).isZero();
     }
-    @Test public void testErrorLabelPersistence() {
+    @Test void testErrorLabelPersistence() {
         frame.showError("Error 1", null);
         assertThat(frame.errorLabel.getText()).contains("Error 1");
         frame.showError("Error 2", null);
         assertThat(frame.errorLabel.getText()).contains("Error 2");
     }
-    @Test public void testFieldValidationAllEmpty() {
+    @Test void testFieldValidationAllEmpty() {
         frame.titleTextField.setText("");
         frame.artistTextField.setText("");
         frame.priceTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testFieldValidationWhitespaceOnly() {
+    @Test void testFieldValidationWhitespaceOnly() {
         frame.titleTextField.setText("   ");
         frame.artistTextField.setText("   ");
         frame.priceTextField.setText("   ");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testFieldValidationMixed() {
+    @Test void testFieldValidationMixed() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("   ");
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test public void testAddButtonActionListener() {
+    @Test void testAddButtonActionListener() {
         frame.titleTextField.setText("Test Artwork");
         frame.artistTextField.setText("Test Artist");
         frame.priceTextField.setText("100.0");
         frame.addButton.doClick();
         verify(mockController).addArtwork(any(Artwork.class));
     }
-    @Test public void testDeleteButtonActionListener() {
+    @Test void testDeleteButtonActionListener() {
         Artwork artwork = new Artwork("Test", "Artist", 100.0);
         frame.artworkAdded(artwork);
         frame.artworkList.setSelectedIndex(0);
         frame.deleteButton.doClick();
         verify(mockController).deleteArtwork(any(String.class));
     }
-    @Test public void testAddButtonInvalidPrice() {
+    @Test void testAddButtonInvalidPrice() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("Artist");
         frame.priceTextField.setText("invalid");
@@ -356,7 +356,7 @@ public class ArtGalleryFrameTest {
         frame.addButton.doClick();
         assertThat(frame.errorLabel.getText()).contains("Invalid price");
     }
-    @Test public void testDocumentListenerChangedUpdate() {
+    @Test void testDocumentListenerChangedUpdate() {
         frame.titleTextField.setText("Title");
         assertThat(frame.addButton.isEnabled()).isFalse();
 
@@ -366,12 +366,12 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testDeleteButtonNoSelection() {
+    @Test void testDeleteButtonNoSelection() {
         frame.artworkList.setSelectedIndex(-1);
         frame.deleteButton.doClick();
         verify(mockController, never()).deleteArtwork(any(String.class));
     }
-    @Test public void testDocumentListenerInsertUpdatePath() {
+    @Test void testDocumentListenerInsertUpdatePath() {
         frame.titleTextField.setText("T");
         assertThat(frame.addButton.isEnabled()).isFalse();
 
@@ -382,7 +382,7 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("99.99");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testDocumentListenerRemoveUpdatePath() {
+    @Test void testDocumentListenerRemoveUpdatePath() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("Artist");
         frame.priceTextField.setText("100");
@@ -394,7 +394,7 @@ public class ArtGalleryFrameTest {
         frame.titleTextField.setText("Title");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testUpdateAddButtonMultipleChanges() {
+    @Test void testUpdateAddButtonMultipleChanges() {
         frame.titleTextField.setText("A");
         assertThat(frame.addButton.isEnabled()).isFalse();
 
@@ -413,7 +413,7 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("50.5");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testDocumentListenerChangedUpdateMethod() {
+    @Test void testDocumentListenerChangedUpdateMethod() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("Artist");
         frame.priceTextField.setText("100");
@@ -426,7 +426,7 @@ public class ArtGalleryFrameTest {
         // Verify button state is maintained after changedUpdate
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test public void testDocumentListenerChangedUpdateDisablesButton() {
+    @Test void testDocumentListenerChangedUpdateDisablesButton() {
         frame.titleTextField.setText("Title");
         frame.artistTextField.setText("");
         frame.priceTextField.setText("100");
