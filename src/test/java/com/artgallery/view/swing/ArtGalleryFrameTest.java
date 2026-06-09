@@ -199,3 +199,6 @@ public class ArtGalleryFrameTest {
         frame.artworkAdded(a3);
         assertThat(frame.listModel.size()).isEqualTo(3);
     }
+    @Test public void testErrorLabelInitiallyBlank() {
+        assertThat(frame.errorLabel.getText()).isEqualTo(" ");
+    }
