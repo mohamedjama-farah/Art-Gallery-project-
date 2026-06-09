@@ -128,3 +128,12 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testRemoveEventFromTextFields() {
+        frame.titleTextField.setText("Test");
+        frame.artistTextField.setText("Test");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+
+        frame.titleTextField.setText("");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
