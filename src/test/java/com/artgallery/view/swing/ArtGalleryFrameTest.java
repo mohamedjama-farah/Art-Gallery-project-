@@ -60,3 +60,9 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.size()).isEqualTo(1);
         assertThat(frame.listModel.get(0)).contains("Starry Night");
     }
+    @Test public void testArtworkRemovedRemovesFromList() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        frame.artworkAdded(artwork);
+        frame.artworkRemoved(artwork);
+        assertThat(frame.listModel.size()).isEqualTo(0);
+    }
