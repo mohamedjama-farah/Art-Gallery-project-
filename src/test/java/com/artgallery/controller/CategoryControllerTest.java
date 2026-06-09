@@ -73,3 +73,11 @@ class CategoryControllerTest {
         assertThat(result.get(1).getName()).isEqualTo("Sculpture");
         verify(mockRepository).findAll();
     }
+    @Test
+    void testDeleteCategory() {
+        Category category = new Category("Painting");
+        when(mockRepository.findById("1")).thenReturn(Optional.of(category));
+
+        controller.deleteCategory("1");
+        verify(mockRepository).delete("1");
+    }
