@@ -271,3 +271,15 @@ class MongoArtworkRepositoryIT {
 		assertThat(all).hasSize(2);
 		assertThat(all).extracting(Artwork::getTitle).contains("A1", "A2");
 	}
+	@Test
+	@DisplayName("Should handle specific year value in documentToArtwork")
+	void testArtworkWithSpecificYear() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		artwork.setYear(1999);  // Set to specific year to ensure setYear is called
+		repository.save(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		// Verify year was set and retrieved correctly
+		assertThat(found.getYear()).isEqualTo(1999);
+	}
