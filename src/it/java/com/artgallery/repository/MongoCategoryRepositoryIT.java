@@ -166,3 +166,10 @@ class MongoCategoryRepositoryIT {
 	void testFindByIdInvalidFormat() {
 		assertThat(repository.findById("not-a-valid-id")).isEmpty();
 	}
+	@Test
+	@DisplayName("Should handle invalid ID format in delete")
+	void testDeleteInvalidIdFormat() {
+		assertThatThrownBy(() -> repository.delete("not-a-valid-id"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Invalid ID format: not-a-valid-id");
+	}
