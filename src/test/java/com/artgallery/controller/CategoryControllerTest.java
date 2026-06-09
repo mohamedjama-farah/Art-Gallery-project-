@@ -89,3 +89,9 @@ class CategoryControllerTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("Category not found: 999");
     }
+    @Test
+    void testDeleteNullIdThrowsException() {
+        assertThatThrownBy(() -> controller.deleteCategory(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("ID cannot be null");
+    }
