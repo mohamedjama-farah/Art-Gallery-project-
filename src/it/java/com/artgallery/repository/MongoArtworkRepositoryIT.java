@@ -283,3 +283,26 @@ class MongoArtworkRepositoryIT {
 		// Verify year was set and retrieved correctly
 		assertThat(found.getYear()).isEqualTo(1999);
 	}
+	@Test
+	@DisplayName("Should handle null year field in document")
+	void testDocumentWithNullYearField() {
+		// Manually create and insert a document with null year
+		Document doc = new Document()
+			.append("title", "Null Year")
+			.append("artist", "Artist")
+			.append("price", 100.0)
+			.append("year", null)
+			.append("description", "Test");
+
+		com.mongodb.client.MongoCollection<Document> collection =
+			mongoClient.getDatabase("artgallery_test").getCollection("artworks");
+		collection.insertOne(doc);
+
+		String id = doc.getObjectId("_id").toString();
+		Artwork found = repository.findById(id).orElse(null);
+
+		assertThat(found).isNotNull();
+		// When year is null, setYear should not be called, year defaults to 0
+		assertThat(found.getYear()).isEqualTo(0);
+	}
+}
