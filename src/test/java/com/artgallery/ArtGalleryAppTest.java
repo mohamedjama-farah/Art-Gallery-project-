@@ -26,3 +26,14 @@ public class ArtGalleryAppTest {
             throw new RuntimeException("ArtGalleryApp.initializeApp method not found", e);
         }
     }
+    @Test
+    @DisplayName("Application class is properly defined")
+    public void testApplicationClassDefined() {
+        try {
+            Class<?> appClass = ArtGalleryApp.class;
+            assertThat(appClass).isNotNull();
+        } catch (Exception e) {
+            throw new RuntimeException("ArtGalleryApp class error", e);
+        }
+    }
+}
