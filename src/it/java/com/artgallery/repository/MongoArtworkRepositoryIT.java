@@ -189,3 +189,20 @@ class MongoArtworkRepositoryIT {
 		List<Artwork> artworks = repository.findAll();
 		assertThat(artworks).isEmpty();
 	}
+	@Test
+	@DisplayName("Should preserve all artwork fields when saving")
+	void testSavePreservesAllFields() {
+		Artwork artwork = new Artwork("Test Title", "Test Artist", 500.0);
+		artwork.setYear(2000);
+		artwork.setDescription("Test Description");
+
+		repository.save(artwork);
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+
+		assertThat(found).isNotNull();
+		assertThat(found.getTitle()).isEqualTo("Test Title");
+		assertThat(found.getArtist()).isEqualTo("Test Artist");
+		assertThat(found.getPrice()).isEqualTo(500.0);
+		assertThat(found.getYear()).isEqualTo(2000);
+		assertThat(found.getDescription()).isEqualTo("Test Description");
+	}
