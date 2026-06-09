@@ -28,3 +28,10 @@ class CategoryTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Name cannot be blank");
 	}
+	@Test
+	@DisplayName("Should set description")
+	void testSetDescription() {
+		Category category = new Category("Impressionism");
+		category.setDescription("A 19th century art movement");
+		assertThat(category.getDescription()).isEqualTo("A 19th century art movement");
+	}
