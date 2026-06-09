@@ -262,3 +262,17 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testClearAllFields() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+
+        Artwork artwork = new Artwork("Title", "Artist", 100.0);
+        frame.artworkAdded(artwork);
+
+        assertThat(frame.titleTextField.getText()).isEmpty();
+        assertThat(frame.artistTextField.getText()).isEmpty();
+        assertThat(frame.priceTextField.getText()).isEmpty();
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
