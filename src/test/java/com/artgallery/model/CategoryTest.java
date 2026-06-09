@@ -21,3 +21,10 @@ class CategoryTest {
 				.isInstanceOf(NullPointerException.class)
 				.hasMessage("Name cannot be null");
 	}
+	@Test
+	@DisplayName("Should throw exception when name is blank")
+	void testCategoryBlankName() {
+		assertThatThrownBy(() -> new Category("   "))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Name cannot be blank");
+	}
