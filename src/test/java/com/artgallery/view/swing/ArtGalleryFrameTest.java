@@ -301,3 +301,6 @@ public class ArtGalleryFrameTest {
     @Test public void testArtworkListName() {
         assertThat(frame.artworkList.getName()).isEqualTo("artworkList");
     }
+    @Test public void testErrorLabelName() {
+        assertThat(frame.errorLabel.getName()).isEqualTo("errorLabel");
+    }
