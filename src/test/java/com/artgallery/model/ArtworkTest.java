@@ -134,3 +134,12 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 2000.0);
 		assertThat(artwork1).isNotEqualTo(artwork2);
 	}
+	@Test
+	@DisplayName("Should not be equal when year differs")
+	void testInequalityWithDifferentYear() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork1.setYear(1889);
+		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork2.setYear(1890);
+		assertThat(artwork1).isNotEqualTo(artwork2);
+	}
