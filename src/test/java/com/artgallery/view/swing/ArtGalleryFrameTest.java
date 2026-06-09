@@ -111,17 +111,22 @@ class ArtGalleryFrameTest {
         frame.artworkRemoved(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
-    @Test void testButtonEnableStateWithWhitespaceOnly() {
-        frame.titleTextField.setText("   ");
-        frame.artistTextField.setText("   ");
-        frame.priceTextField.setText("   ");
+    @ParameterizedTest
+    @MethodSource("provideButtonDisabledCasesExtended")
+    void testButtonDisabledInVariousScenarios(String title, String artist, String price) {
+        frame.titleTextField.setText(title);
+        frame.artistTextField.setText(artist);
+        frame.priceTextField.setText(price);
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test void testButtonDisabledWhenOnlyArtistMissing() {
-        frame.titleTextField.setText("Title");
-        frame.artistTextField.setText("");
-        frame.priceTextField.setText("100");
-        assertThat(frame.addButton.isEnabled()).isFalse();
+    static Stream<Arguments> provideButtonDisabledCasesExtended() {
+        return Stream.of(
+            Arguments.of("   ", "   ", "   "),
+            Arguments.of("Title", "", "100"),
+            Arguments.of("", "Artist", "100"),
+            Arguments.of("Title", "Artist", ""),
+            Arguments.of("Title", "   ", "100")
+        );
     }
     @Test void testRemoveEventFromTextFields() {
         frame.titleTextField.setText("Test");
