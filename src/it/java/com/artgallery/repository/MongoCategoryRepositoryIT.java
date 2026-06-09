@@ -126,3 +126,14 @@ class MongoCategoryRepositoryIT {
 		List<Category> categories = repository.findAll();
 		assertThat(categories).isEmpty();
 	}
+	@Test
+	@DisplayName("Should save and retrieve category with null description")
+	void testCategoryWithNullDescription() {
+		Category category = new Category("Impressionism");
+		repository.save(category);
+
+		Category found = repository.findById(category.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getName()).isEqualTo("Impressionism");
+		assertThat(found.getDescription()).isNull();
+	}
