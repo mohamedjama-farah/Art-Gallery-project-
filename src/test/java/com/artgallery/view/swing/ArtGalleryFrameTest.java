@@ -116,17 +116,13 @@ public class ArtGalleryFrameTest {
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
     @Test public void testButtonEnablementChanges() {
-        GuiActionRunner.execute(() -> {
-            frame.titleTextField.setText("");
-            frame.artistTextField.setText("");
-            frame.priceTextField.setText("");
-        });
+        frame.titleTextField.setText("");
+        frame.artistTextField.setText("");
+        frame.priceTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
-        GuiActionRunner.execute(() -> {
-            frame.titleTextField.setText("Title");
-            frame.artistTextField.setText("Artist");
-            frame.priceTextField.setText("100");
-        });
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
     @Test public void testRemoveEventFromTextFields() {
