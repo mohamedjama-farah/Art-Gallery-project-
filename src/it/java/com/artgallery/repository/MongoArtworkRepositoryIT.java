@@ -80,3 +80,15 @@ class MongoArtworkRepositoryIT {
 		// Default year when not set explicitly
 		assertThat(found.getYear()).isEqualTo(0);
 	}
+	@Test
+	@DisplayName("Should save artwork to database")
+	void testSaveArtwork() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork.setYear(1889);
+		artwork.setDescription("A painting of a starry night");
+
+		repository.save(artwork);
+
+		assertThat(artwork.getId()).isNotNull();
+		assertThat(artwork.getId()).isNotEmpty();
+	}
