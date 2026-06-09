@@ -259,3 +259,15 @@ class MongoArtworkRepositoryIT {
 		assertThat(found).isNotNull();
 		assertThat(found.getDescription()).isNull();
 	}
+	@Test
+	@DisplayName("Should find all returns same objects after save")
+	void testFindAllReturnsSavedObjects() {
+		Artwork a1 = new Artwork("A1", "Artist1", 100.0);
+		Artwork a2 = new Artwork("A2", "Artist2", 200.0);
+		repository.save(a1);
+		repository.save(a2);
+
+		List<Artwork> all = repository.findAll();
+		assertThat(all).hasSize(2);
+		assertThat(all).extracting(Artwork::getTitle).contains("A1", "A2");
+	}
