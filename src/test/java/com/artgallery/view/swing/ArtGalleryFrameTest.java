@@ -246,3 +246,9 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.get(0)).contains("A2");
         assertThat(frame.listModel.get(1)).contains("A3");
     }
+    @Test public void testErrorLabelUpdatesCorrectly() {
+        frame.errorLabel.setText("Old error");
+        Artwork artwork = new Artwork("Test", "Artist", 100.0);
+        frame.showError("New error", artwork);
+        assertThat(frame.errorLabel.getText()).contains("New error").contains("Test");
+    }
