@@ -90,3 +90,10 @@ class ArtworkTest {
 		artwork2.setYear(1889);
 		assertThat(artwork1).isEqualTo(artwork2);
 	}
+	@Test
+	@DisplayName("Should not be equal when fields differ")
+	void testInequality() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		Artwork artwork2 = new Artwork("Starry Night", "Picasso", 1000.0);
+		assertThat(artwork1).isNotEqualTo(artwork2);
+	}
