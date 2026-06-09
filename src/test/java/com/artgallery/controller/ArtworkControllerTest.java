@@ -28,3 +28,9 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> new ArtworkController(mockRepository, null))
             .isInstanceOf(NullPointerException.class).hasMessage("View cannot be null");
     }
+    @Test void testAllArtworksShowsAllArtworksInView() {
+        List<Artwork> list = Arrays.asList(new Artwork("A","B",1.0), new Artwork("C","D",2.0));
+        when(mockRepository.findAll()).thenReturn(list);
+        controller.allArtworks();
+        verify(mockView).showAllArtworks(list);
+    }
