@@ -96,3 +96,13 @@ class MongoCategoryRepositoryIT {
 
 		assertThat(categories).hasSize(2);
 	}
+	@Test
+	@DisplayName("Should delete category by ID")
+	void testDeleteCategory() {
+		Category category = new Category("Contemporary");
+		repository.save(category);
+
+		repository.delete(category.getId());
+
+		assertThat(repository.findById(category.getId())).isEmpty();
+	}
