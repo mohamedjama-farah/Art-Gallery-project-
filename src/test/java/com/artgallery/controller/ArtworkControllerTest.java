@@ -80,3 +80,11 @@ class ArtworkControllerTest {
         controller.allArtworks();
         verify(mockView).showAllArtworks(list);
     }
+    @Test void testGetArtworkByIdReturnsCorrectArtwork() {
+        Artwork artwork = new Artwork("Test", "Artist", 500.0);
+        artwork.setId("test-123");
+        when(mockRepository.findById("test-123")).thenReturn(Optional.of(artwork));
+        Artwork result = controller.getArtworkById("test-123");
+        assertThat(result).isNotNull();
+        assertThat(result.getId()).isEqualTo("test-123");
+    }
