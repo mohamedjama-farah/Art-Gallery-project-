@@ -66,3 +66,10 @@ class ArtworkTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Invalid year");
 	}
+	@Test
+	@DisplayName("Should set description")
+	void testSetDescription() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork.setDescription("A painting of a starry night");
+		assertThat(artwork.getDescription()).isEqualTo("A painting of a starry night");
+	}
