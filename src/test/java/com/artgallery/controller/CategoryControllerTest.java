@@ -26,3 +26,9 @@ class CategoryControllerTest {
         mockRepository = mock(CategoryRepository.class);
         controller = new CategoryController(mockRepository);
     }
+    @Test
+    void testConstructorNullRepository() {
+        assertThatThrownBy(() -> new CategoryController(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("Repository cannot be null");
+    }
