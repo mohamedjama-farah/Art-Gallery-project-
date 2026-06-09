@@ -62,3 +62,14 @@ class CategoryControllerTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("Category not found: 999");
     }
+    @Test
+    void testGetAllCategories() {
+        List<Category> cats = Arrays.asList(new Category("Painting"), new Category("Sculpture"));
+        when(mockRepository.findAll()).thenReturn(cats);
+        List<Category> result = controller.getAllCategories();
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getName()).isEqualTo("Painting");
+        assertThat(result.get(1).getName()).isEqualTo("Sculpture");
+        verify(mockRepository).findAll();
+    }
