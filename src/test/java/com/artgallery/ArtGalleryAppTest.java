@@ -16,3 +16,13 @@ public class ArtGalleryAppTest {
             throw new RuntimeException("ArtGalleryApp.main method not found", e);
         }
     }
+    @Test
+    @DisplayName("Should have initializeApp method")
+    public void testInitializeAppMethodExists() {
+        try {
+            Class<?> appClass = Class.forName("com.artgallery.ArtGalleryApp");
+            assertThat(appClass.getDeclaredMethod("initializeApp")).isNotNull();
+        } catch (Exception e) {
+            throw new RuntimeException("ArtGalleryApp.initializeApp method not found", e);
+        }
+    }
