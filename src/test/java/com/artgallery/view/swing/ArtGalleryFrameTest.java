@@ -85,3 +85,7 @@ public class ArtGalleryFrameTest {
         assertThat(frame.artistTextField.getText()).isEmpty();
         assertThat(frame.priceTextField.getText()).isEmpty();
     }
+    @Test public void testShowAllArtworksEmptyList() {
+        frame.showAllArtworks(Arrays.asList());
+        assertThat(frame.listModel.size()).isEqualTo(0);
+    }
