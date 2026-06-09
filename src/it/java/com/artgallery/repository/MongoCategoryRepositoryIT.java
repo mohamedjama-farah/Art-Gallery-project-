@@ -46,3 +46,12 @@ class MongoCategoryRepositoryIT {
 		singleParamRepo.save(category);
 		assertThat(category.getId()).isNotNull();
 	}
+	@Test
+	@DisplayName("Should throw exception when updating with invalid ID format")
+	void testUpdateWithInvalidIdFormat() {
+		Category category = new Category("Test");
+		category.setId("not-a-valid-objectid");
+		assertThatThrownBy(() -> repository.update(category))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Invalid ID format: not-a-valid-objectid");
+	}
