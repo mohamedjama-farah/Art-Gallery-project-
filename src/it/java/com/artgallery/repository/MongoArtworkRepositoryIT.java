@@ -133,3 +133,17 @@ class MongoArtworkRepositoryIT {
 
 		assertThat(repository.findById(artwork.getId())).isEmpty();
 	}
+	@Test
+	@DisplayName("Should update artwork")
+	void testUpdateArtwork() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork.setYear(1889);
+		repository.save(artwork);
+
+		artwork.setDescription("Updated description");
+		repository.update(artwork);
+
+		Artwork updated = repository.findById(artwork.getId()).orElse(null);
+		assertThat(updated).isNotNull();
+		assertThat(updated.getDescription()).isEqualTo("Updated description");
+	}
