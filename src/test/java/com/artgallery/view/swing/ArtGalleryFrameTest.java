@@ -283,3 +283,6 @@ public class ArtGalleryFrameTest {
     @Test public void testFrameTitle() {
         assertThat(frame.getTitle()).isEqualTo("Art Gallery Management System");
     }
+    @Test public void testAddButtonName() {
+        assertThat(frame.addButton.getName()).isEqualTo("addButton");
+    }
