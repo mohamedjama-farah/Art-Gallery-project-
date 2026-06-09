@@ -422,3 +422,16 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("50.5");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testDocumentListenerChangedUpdateMethod() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+
+        // Directly invoke changedUpdate through the documentListener field
+        DocumentEvent mockEvent = mock(DocumentEvent.class);
+        frame.documentListener.changedUpdate(mockEvent);
+
+        // Verify button state is maintained after changedUpdate
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
