@@ -164,3 +164,9 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("A2", "Artist2", 200.0);
 		assertThat(artwork1.hashCode()).isNotEqualTo(artwork2.hashCode());
 	}
+	@Test
+	@DisplayName("Should compare with self")
+	void testEqualityWithSelf() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		assertThat(artwork).isEqualTo(artwork);
+	}
