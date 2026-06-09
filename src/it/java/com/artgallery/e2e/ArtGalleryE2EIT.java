@@ -55,3 +55,10 @@ class ArtGalleryE2EIT {
         artworkController.deleteArtwork(artwork.getId());
         assertThat(artworkController.getAllArtworks()).isEmpty();
     }
+    @Test void testUpdateArtwork() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        artworkController.addArtwork(artwork);
+        artwork.setDescription("Updated");
+        artworkController.updateArtwork(artwork);
+        assertThat(artworkController.getArtworkById(artwork.getId()).getDescription()).isEqualTo("Updated");
+    }
