@@ -74,3 +74,9 @@ class CategoryTest {
 		Category category = new Category("Impressionism");
 		assertThat(category).isNotEqualTo(null);
 	}
+	@Test
+	@DisplayName("Should not be equal to different type")
+	void testEqualityWithDifferentType() {
+		Category category = new Category("Impressionism");
+		assertThat(category).isNotEqualTo("Not a category");
+	}
