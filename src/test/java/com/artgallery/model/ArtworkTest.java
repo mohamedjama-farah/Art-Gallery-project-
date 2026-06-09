@@ -58,3 +58,11 @@ class ArtworkTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Invalid year");
 	}
+	@Test
+	@DisplayName("Should throw exception when year is too recent")
+	void testSetYearTooRecent() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		assertThatThrownBy(() -> artwork.setYear(2101))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Invalid year");
+	}
