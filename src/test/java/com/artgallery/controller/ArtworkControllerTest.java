@@ -24,3 +24,7 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> new ArtworkController(null, mockView))
             .isInstanceOf(NullPointerException.class).hasMessage("Repository cannot be null");
     }
+    @Test void testConstructorNullView() {
+        assertThatThrownBy(() -> new ArtworkController(mockRepository, null))
+            .isInstanceOf(NullPointerException.class).hasMessage("View cannot be null");
+    }
