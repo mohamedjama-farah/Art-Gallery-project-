@@ -81,3 +81,12 @@ class ArtworkTest {
 		artwork.setId(id);
 		assertThat(artwork.getId()).isEqualTo(id);
 	}
+	@Test
+	@DisplayName("Should be equal when all fields match")
+	void testEquality() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork1.setYear(1889);
+		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork2.setYear(1889);
+		assertThat(artwork1).isEqualTo(artwork2);
+	}
