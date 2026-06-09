@@ -319,3 +319,9 @@ public class ArtGalleryFrameTest {
         frame.artworkRemoved(a);
         assertThat(frame.listModel.getSize()).isZero();
     }
+    @Test public void testErrorLabelPersistence() {
+        frame.showError("Error 1", null);
+        assertThat(frame.errorLabel.getText()).contains("Error 1");
+        frame.showError("Error 2", null);
+        assertThat(frame.errorLabel.getText()).contains("Error 2");
+    }
