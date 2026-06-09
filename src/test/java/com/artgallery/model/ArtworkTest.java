@@ -16,3 +16,10 @@ class ArtworkTest {
 		assertThat(artwork.getArtist()).isEqualTo("Van Gogh");
 		assertThat(artwork.getPrice()).isEqualTo(1000.0);
 	}
+	@Test
+	@DisplayName("Should throw exception when title is null")
+	void testArtworkNullTitle() {
+		assertThatThrownBy(() -> new Artwork(null, "Van Gogh", 1000.0))
+				.isInstanceOf(NullPointerException.class)
+				.hasMessage("Title cannot be null");
+	}
