@@ -206,3 +206,20 @@ class MongoArtworkRepositoryIT {
 		assertThat(found.getYear()).isEqualTo(2000);
 		assertThat(found.getDescription()).isEqualTo("Test Description");
 	}
+	@Test
+	@DisplayName("Should update only description field")
+	void testUpdateOnlyDescription() {
+		Artwork artwork = new Artwork("Original", "Artist", 100.0);
+		artwork.setYear(2000);
+		artwork.setDescription("Original Description");
+		repository.save(artwork);
+
+		artwork.setDescription("Updated Description");
+		repository.update(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getDescription()).isEqualTo("Updated Description");
+		assertThat(found.getTitle()).isEqualTo("Original");
+		assertThat(found.getYear()).isEqualTo(2000);
+	}
