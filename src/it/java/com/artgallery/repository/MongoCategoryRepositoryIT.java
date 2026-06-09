@@ -173,3 +173,15 @@ class MongoCategoryRepositoryIT {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("Invalid ID format: not-a-valid-id");
 	}
+	@Test
+	@DisplayName("Should preserve all fields when saving")
+	void testSavePreservesAllFields() {
+		Category category = new Category("Test Category");
+		category.setDescription("Test Description");
+		repository.save(category);
+
+		Category found = repository.findById(category.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getName()).isEqualTo("Test Category");
+		assertThat(found.getDescription()).isEqualTo("Test Description");
+	}
