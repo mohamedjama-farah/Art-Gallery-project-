@@ -208,3 +208,6 @@ public class ArtGalleryFrameTest {
     @Test public void testSetControllerCallsAllArtworks() {
         verify(mockController).allArtworks();
     }
+    @Test public void testAddButtonInitiallyDisabled() {
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
