@@ -36,7 +36,6 @@ public class MongoArtworkRepository implements ArtworkRepository {
 	 * @param databaseName the database name (non-null)
 	 */
 	public MongoArtworkRepository(MongoClient mongoClient, String databaseName) {
-		this.mongoClient = Objects.requireNonNull(mongoClient, "MongoClient cannot be null");
 		this.database = mongoClient.getDatabase(databaseName);
 		this.collection = database.getCollection("artworks");
 	}

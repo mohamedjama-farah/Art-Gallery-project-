@@ -36,7 +36,6 @@ public class MongoCategoryRepository implements CategoryRepository {
 	 * @param databaseName the database name (non-null)
 	 */
 	public MongoCategoryRepository(MongoClient mongoClient, String databaseName) {
-		this.mongoClient = Objects.requireNonNull(mongoClient, "MongoClient cannot be null");
 		this.database = mongoClient.getDatabase(databaseName);
 		this.collection = database.getCollection("categories");
 	}
