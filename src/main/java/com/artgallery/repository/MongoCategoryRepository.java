@@ -19,7 +19,6 @@ import com.mongodb.client.model.Filters;
  * Persists categories to a MongoDB database.
  */
 public class MongoCategoryRepository implements CategoryRepository {
-	private final MongoClient mongoClient;
 	private final MongoDatabase database;
 	private final MongoCollection<Document> collection;
 

@@ -9,8 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.PlainDocument;
 import com.artgallery.controller.ArtworkController;
 import com.artgallery.model.Artwork;
 public class ArtGalleryFrameTest {
@@ -64,7 +62,7 @@ public class ArtGalleryFrameTest {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
         frame.artworkAdded(artwork);
         frame.artworkRemoved(artwork);
-        assertThat(frame.listModel.size()).isEqualTo(0);
+        assertThat(frame.listModel.size()).isZero();
     }
     @Test public void testShowErrorDisplaysMessage() {
         Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
@@ -87,7 +85,7 @@ public class ArtGalleryFrameTest {
     }
     @Test public void testShowAllArtworksEmptyList() {
         frame.showAllArtworks(Arrays.asList());
-        assertThat(frame.listModel.size()).isEqualTo(0);
+        assertThat(frame.listModel.size()).isZero();
     }
     @Test public void testMultipleArtworksAdded() {
         Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
@@ -196,7 +194,7 @@ public class ArtGalleryFrameTest {
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
     @Test public void testListSelectionMode() {
-        assertThat(frame.artworkList.getSelectionMode()).isEqualTo(0); // SINGLE_SELECTION = 0
+        assertThat(frame.artworkList.getSelectionMode()).isZero(); // SINGLE_SELECTION = 0
     }
     @Test public void testSetControllerCallsAllArtworks() {
         verify(mockController).allArtworks();

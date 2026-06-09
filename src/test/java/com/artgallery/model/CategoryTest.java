@@ -66,7 +66,7 @@ class CategoryTest {
 		category1.setDescription("Desc1");
 		Category category2 = new Category("Impressionism");
 		category2.setDescription("Desc1");
-		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
+		assertThat(category1).hasSameHashCodeAs(category2);
 	}
 	@Test
 	@DisplayName("Should not be equal to null")
@@ -129,7 +129,7 @@ class CategoryTest {
 		category1.setDescription("Desc");
 		Category category2 = new Category("Test");
 		category2.setDescription("Desc");
-		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
+		assertThat(category1).hasSameHashCodeAs(category2);
 	}
 	@Test
 	@DisplayName("Should have toString with category name")

@@ -19,7 +19,6 @@ import com.mongodb.client.model.Filters;
  * Persists artworks to a MongoDB database.
  */
 public class MongoArtworkRepository implements ArtworkRepository {
-	private final MongoClient mongoClient;
 	private final MongoDatabase database;
 	private final MongoCollection<Document> collection;
 

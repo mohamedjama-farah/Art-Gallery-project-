@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ArtGalleryAppTest {
     @Test
     @DisplayName("Should have main method")
-    public void testMainMethodExists() {
+    void testMainMethodExists() {
         try {
             Class<?> appClass = Class.forName("com.artgallery.ArtGalleryApp");
             assertThat(appClass.getMethod("main", String[].class)).isNotNull();
@@ -18,7 +18,7 @@ public class ArtGalleryAppTest {
     }
     @Test
     @DisplayName("Should have initializeApp method")
-    public void testInitializeAppMethodExists() {
+    void testInitializeAppMethodExists() {
         try {
             Class<?> appClass = Class.forName("com.artgallery.ArtGalleryApp");
             assertThat(appClass.getDeclaredMethod("initializeApp")).isNotNull();
@@ -28,7 +28,7 @@ public class ArtGalleryAppTest {
     }
     @Test
     @DisplayName("Application class is properly defined")
-    public void testApplicationClassDefined() {
+    void testApplicationClassDefined() {
         try {
             Class<?> appClass = ArtGalleryApp.class;
             assertThat(appClass).isNotNull();

@@ -104,7 +104,7 @@ class ArtworkTest {
 		artwork1.setYear(1889);
 		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 1000.0);
 		artwork2.setYear(1889);
-		assertThat(artwork1.hashCode()).isEqualTo(artwork2.hashCode());
+		assertThat(artwork1).hasSameHashCodeAs(artwork2);
 	}
 	@Test
 	@DisplayName("Should not be equal to null")
@@ -208,6 +208,6 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
 		artwork2.setYear(2000);
 		artwork2.setDescription("Desc");
-		assertThat(artwork1.hashCode()).isEqualTo(artwork2.hashCode());
+		assertThat(artwork1).hasSameHashCodeAs(artwork2);
 	}
 }

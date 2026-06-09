@@ -50,13 +50,13 @@ public class ArtworkController {
      */
     public void deleteArtwork(String id) {
         Objects.requireNonNull(id, "ID cannot be null");
-        if (repository.findById(id).isEmpty()) {
+        java.util.Optional<Artwork> found = repository.findById(id);
+        if (!found.isPresent()) {
             view.showError("No existing artwork with id " + id, null);
             return;
         }
-        Artwork artwork = repository.findById(id).get();
         repository.delete(id);
-        view.artworkRemoved(artwork);
+        view.artworkRemoved(found.get());
     }
 
     /**
