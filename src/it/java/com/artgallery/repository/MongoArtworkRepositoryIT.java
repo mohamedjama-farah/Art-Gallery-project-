@@ -165,3 +165,9 @@ class MongoArtworkRepositoryIT {
 		assertThatThrownBy(() -> repository.delete(null))
 			.isInstanceOf(NullPointerException.class);
 	}
+	@Test
+	@DisplayName("Should update null artwork throws exception")
+	void testUpdateNullArtwork() {
+		assertThatThrownBy(() -> repository.update(null))
+			.isInstanceOf(NullPointerException.class);
+	}
