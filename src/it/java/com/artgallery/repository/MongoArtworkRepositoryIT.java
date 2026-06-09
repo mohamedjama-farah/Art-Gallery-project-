@@ -106,3 +106,8 @@ class MongoArtworkRepositoryIT {
 		assertThat(found.getArtist()).isEqualTo("Van Gogh");
 		assertThat(found.getPrice()).isEqualTo(1000.0);
 	}
+	@Test
+	@DisplayName("Should return empty optional when artwork not found")
+	void testFindArtworkNotFound() {
+		assertThat(repository.findById("507f1f77bcf86cd799439011")).isEmpty();
+	}
