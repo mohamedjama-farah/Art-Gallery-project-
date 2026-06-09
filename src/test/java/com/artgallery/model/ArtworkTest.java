@@ -186,3 +186,10 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
 		assertThat(artwork1).isEqualTo(artwork2);
 	}
+	@Test
+	@DisplayName("Should have unique IDs")
+	void testUniqueIds() {
+		Artwork artwork1 = new Artwork("Test", "Artist", 100.0);
+		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
+		assertThat(artwork1.getId()).isNotEqualTo(artwork2.getId());
+	}
