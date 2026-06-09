@@ -31,3 +31,8 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("1000.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testAddButtonDisabledWhenTitleEmpty() {
+        frame.artistTextField.setText("Van Gogh");
+        frame.priceTextField.setText("1000.0");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
