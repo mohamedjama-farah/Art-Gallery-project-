@@ -96,3 +96,9 @@ public class ArtGalleryFrameTest {
         frame.artworkAdded(a2);
         assertThat(frame.listModel.size()).isEqualTo(2);
     }
+    @Test public void testErrorLabelClearedAfterArtworkAdded() {
+        frame.errorLabel.setText("Some error");
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        frame.artworkAdded(artwork);
+        assertThat(frame.errorLabel.getText()).isEqualTo(" ");
+    }
