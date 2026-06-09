@@ -50,3 +50,11 @@ class ArtworkTest {
 		artwork.setYear(1889);
 		assertThat(artwork.getYear()).isEqualTo(1889);
 	}
+	@Test
+	@DisplayName("Should throw exception when year is too old")
+	void testSetYearTooOld() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		assertThatThrownBy(() -> artwork.setYear(999))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Invalid year");
+	}
