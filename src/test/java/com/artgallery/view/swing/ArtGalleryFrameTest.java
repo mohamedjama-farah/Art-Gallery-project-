@@ -25,3 +25,9 @@ public class ArtGalleryFrameTest {
     @Test public void testAddButtonIsDisabledWhenFieldsAreEmpty() {
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testAddButtonIsEnabledWhenAllFieldsFilled() {
+        frame.titleTextField.setText("Starry Night");
+        frame.artistTextField.setText("Van Gogh");
+        frame.priceTextField.setText("1000.0");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
