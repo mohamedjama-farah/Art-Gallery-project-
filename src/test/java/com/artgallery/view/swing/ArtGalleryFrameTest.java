@@ -295,3 +295,6 @@ public class ArtGalleryFrameTest {
     @Test public void testArtistTextFieldName() {
         assertThat(frame.artistTextField.getName()).isEqualTo("artistTextField");
     }
+    @Test public void testPriceTextFieldName() {
+        assertThat(frame.priceTextField.getName()).isEqualTo("priceTextField");
+    }
