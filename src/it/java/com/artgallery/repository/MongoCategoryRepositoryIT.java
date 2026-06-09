@@ -79,3 +79,8 @@ class MongoCategoryRepositoryIT {
 		assertThat(found.getName()).isEqualTo("Sculpture");
 		assertThat(found.getDescription()).isEqualTo("Stone and bronze sculptures");
 	}
+	@Test
+	@DisplayName("Should return empty optional when category not found")
+	void testFindCategoryNotFound() {
+		assertThat(repository.findById("507f1f77bcf86cd799439011")).isEmpty();
+	}
