@@ -137,3 +137,9 @@ class MongoCategoryRepositoryIT {
 		assertThat(found.getName()).isEqualTo("Impressionism");
 		assertThat(found.getDescription()).isNull();
 	}
+	@Test
+	@DisplayName("Should throw exception when saving null category")
+	void testSaveNullCategory() {
+		assertThatThrownBy(() -> repository.save(null))
+			.isInstanceOf(NullPointerException.class);
+	}
