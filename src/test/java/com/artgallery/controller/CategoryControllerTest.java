@@ -104,3 +104,13 @@ class CategoryControllerTest {
         controller.updateCategory(category);
         verify(mockRepository).update(category);
     }
+    @Test
+    void testUpdateCategoryNotFound() {
+        Category category = new Category("Painting");
+        category.setId("999");
+        when(mockRepository.findById("999")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> controller.updateCategory(category))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Category not found: 999");
+    }
