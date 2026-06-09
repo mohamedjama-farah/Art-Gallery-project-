@@ -343,3 +343,10 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testAddButtonActionListener() {
+        frame.titleTextField.setText("Test Artwork");
+        frame.artistTextField.setText("Test Artist");
+        frame.priceTextField.setText("100.0");
+        frame.addButton.doClick();
+        verify(mockController).addArtwork(any(Artwork.class));
+    }
