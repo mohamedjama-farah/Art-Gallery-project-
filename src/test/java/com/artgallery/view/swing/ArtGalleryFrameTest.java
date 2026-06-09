@@ -141,3 +141,9 @@ public class ArtGalleryFrameTest {
         frame.showError("Error", null);
         assertThat(frame.errorLabel.getText()).isEqualTo("Error");
     }
+    @Test public void testArtworkAddedUpdatesErrorLabel() {
+        frame.errorLabel.setText("Previous error");
+        Artwork artwork = new Artwork("Test", "Artist", 100.0);
+        frame.artworkAdded(artwork);
+        assertThat(frame.errorLabel.getText()).isEqualTo(" ");
+    }
