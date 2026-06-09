@@ -84,3 +84,15 @@ class MongoCategoryRepositoryIT {
 	void testFindCategoryNotFound() {
 		assertThat(repository.findById("507f1f77bcf86cd799439011")).isEmpty();
 	}
+	@Test
+	@DisplayName("Should find all categories")
+	void testFindAllCategories() {
+		Category category1 = new Category("Modern Art");
+		Category category2 = new Category("Classical Art");
+		repository.save(category1);
+		repository.save(category2);
+
+		List<Category> categories = repository.findAll();
+
+		assertThat(categories).hasSize(2);
+	}
