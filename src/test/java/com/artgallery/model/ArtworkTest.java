@@ -127,3 +127,10 @@ class ArtworkTest {
 		artwork2.setDescription("Desc2");
 		assertThat(artwork1).isNotEqualTo(artwork2);
 	}
+	@Test
+	@DisplayName("Should not be equal when price differs")
+	void testInequalityWithDifferentPrice() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 2000.0);
+		assertThat(artwork1).isNotEqualTo(artwork2);
+	}
