@@ -133,3 +133,16 @@ class ArtworkControllerTest {
         verify(mockView).artworkAdded(artwork);
         verify(mockView, never()).showError(anyString(), any());
     }
+    @Test void testAddArtworkNeverShowsErrorWhenIdNotInRepository() {
+        Artwork artwork = new Artwork("New", "Artist", 100.0);
+        artwork.setId("test-id-not-in-repo");
+        when(mockRepository.findById("test-id-not-in-repo")).thenReturn(Optional.empty());
+
+        controller.addArtwork(artwork);
+
+        InOrder order = inOrder(mockRepository, mockView);
+        order.verify(mockRepository).findById("test-id-not-in-repo");
+        order.verify(mockRepository).save(artwork);
+        order.verify(mockView).artworkAdded(artwork);
+        verify(mockView, never()).showError(anyString(), any());
+    }
