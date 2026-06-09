@@ -73,3 +73,10 @@ class ArtGalleryE2EIT {
         artworkController.deleteArtwork(a2.getId());
         assertThat(artworkController.getAllArtworks()).hasSize(2);
     }
+    @Test void testAddAndRetrieveCategory() {
+        Category category = new Category("Painting");
+        category.setDescription("Oil paintings");
+        categoryController.addCategory(category);
+        Category retrieved = categoryController.getCategoryById(category.getId());
+        assertThat(retrieved.getName()).isEqualTo("Painting");
+    }
