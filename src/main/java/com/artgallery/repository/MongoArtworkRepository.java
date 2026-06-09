@@ -14,21 +14,38 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
+/**
+ * MongoDB implementation of ArtworkRepository.
+ * Persists artworks to a MongoDB database.
+ */
 public class MongoArtworkRepository implements ArtworkRepository {
 	private final MongoClient mongoClient;
 	private final MongoDatabase database;
 	private final MongoCollection<Document> collection;
 
+	/**
+	 * Creates a new MongoArtworkRepository with default database name.
+	 * @param mongoClient the MongoDB client (non-null)
+	 */
 	public MongoArtworkRepository(MongoClient mongoClient) {
 		this(mongoClient, "art-gallery");
 	}
 
+	/**
+	 * Creates a new MongoArtworkRepository with specified database name.
+	 * @param mongoClient the MongoDB client (non-null)
+	 * @param databaseName the database name (non-null)
+	 */
 	public MongoArtworkRepository(MongoClient mongoClient, String databaseName) {
 		this.mongoClient = Objects.requireNonNull(mongoClient, "MongoClient cannot be null");
 		this.database = mongoClient.getDatabase(databaseName);
 		this.collection = database.getCollection("artworks");
 	}
 
+	/**
+	 * Saves a new artwork to the database.
+	 * @param artwork the artwork to save (non-null)
+	 */
 	@Override
 	public void save(Artwork artwork) {
 		Objects.requireNonNull(artwork, "Artwork cannot be null");
@@ -38,6 +55,11 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		artwork.setId(doc.getObjectId("_id").toString());
 	}
 
+	/**
+	 * Finds an artwork by ID.
+	 * @param id the artwork ID (non-null)
+	 * @return Optional containing the artwork if found
+	 */
 	@Override
 	public Optional<Artwork> findById(String id) {
 		Objects.requireNonNull(id, "ID cannot be null");
@@ -52,6 +74,10 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		return Optional.empty();
 	}
 
+	/**
+	 * Finds all artworks in the database.
+	 * @return list of all artworks
+	 */
 	@Override
 	public List<Artwork> findAll() {
 		List<Artwork> artworks = new ArrayList<>();
@@ -59,6 +85,11 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		return artworks;
 	}
 
+	/**
+	 * Deletes an artwork by ID.
+	 * @param id the artwork ID (non-null)
+	 * @throws IllegalArgumentException if ID format is invalid
+	 */
 	@Override
 	public void delete(String id) {
 		Objects.requireNonNull(id, "ID cannot be null");
@@ -69,6 +100,11 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		}
 	}
 
+	/**
+	 * Updates an existing artwork.
+	 * @param artwork the artwork to update (non-null)
+	 * @throws IllegalArgumentException if artwork ID is invalid
+	 */
 	@Override
 	public void update(Artwork artwork) {
 		Objects.requireNonNull(artwork, "Artwork cannot be null");

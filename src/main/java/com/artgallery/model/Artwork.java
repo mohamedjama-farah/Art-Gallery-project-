@@ -3,6 +3,10 @@ package com.artgallery.model;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents an artwork in the gallery.
+ * Contains information about title, artist, price, year, and description.
+ */
 public class Artwork {
 	private String id;
 	private String title;
@@ -11,6 +15,13 @@ public class Artwork {
 	private int year;
 	private String description;
 
+	/**
+	 * Creates a new Artwork with title, artist, and price.
+	 * @param title artwork title (non-null)
+	 * @param artist artwork artist (non-null)
+	 * @param price artwork price (must be non-negative)
+	 * @throws IllegalArgumentException if price is negative
+	 */
 	public Artwork(String title, String artist, double price) {
 		this.id = UUID.randomUUID().toString();
 		this.title = Objects.requireNonNull(title, "Title cannot be null");
@@ -21,30 +32,59 @@ public class Artwork {
 		this.price = price;
 	}
 
+	/**
+	 * Returns the unique identifier of this artwork.
+	 * @return artwork ID
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the unique identifier of this artwork.
+	 * @param id artwork ID
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Returns the title of this artwork.
+	 * @return artwork title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Returns the artist of this artwork.
+	 * @return artwork artist
+	 */
 	public String getArtist() {
 		return artist;
 	}
 
+	/**
+	 * Returns the price of this artwork.
+	 * @return artwork price
+	 */
 	public double getPrice() {
 		return price;
 	}
 
+	/**
+	 * Returns the year of this artwork.
+	 * @return artwork year (0 if not set)
+	 */
 	public int getYear() {
 		return year;
 	}
 
+	/**
+	 * Sets the year of this artwork.
+	 * @param year artwork year (must be between 1000 and 2100)
+	 * @throws IllegalArgumentException if year is out of valid range
+	 */
 	public void setYear(int year) {
 		if (year < 1000 || year > 2100) {
 			throw new IllegalArgumentException("Invalid year");
@@ -52,19 +92,36 @@ public class Artwork {
 		this.year = year;
 	}
 
+	/**
+	 * Returns the description of this artwork.
+	 * @return artwork description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Sets the description of this artwork.
+	 * @param description artwork description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Returns the hash code of this artwork.
+	 * @return hash code
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(artist, description, price, title, year);
 	}
 
+	/**
+	 * Compares this artwork with another object for equality.
+	 * @param obj object to compare
+	 * @return true if equal, false otherwise
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -79,6 +136,10 @@ public class Artwork {
 				&& Objects.equals(title, other.title) && year == other.year;
 	}
 
+	/**
+	 * Returns a string representation of this artwork.
+	 * @return string representation
+	 */
 	@Override
 	public String toString() {
 		return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + ", price=" + price + ", year=" + year
