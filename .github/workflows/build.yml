@@ -22,15 +22,21 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Xvfb for Swing GUI tests
+    - name: Install Xvfb
       run: sudo apt-get install -y xvfb
 
-    - name: Build and run tests with JaCoCo
+    - name: Build and Test
       run: xvfb-run --auto-servernum mvn clean verify -B
 
-    - name: Upload coverage to Coveralls
+    - name: Upload to Coveralls
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         file: target/site/jacoco/jacoco.xml
         format: jacoco
+
+    - name: SonarCloud Scan
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=mohamedjama-farah_Art-Gallery-project- -Dsonar.organization=mohamedjama-farah -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
