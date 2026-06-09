@@ -111,3 +111,15 @@ class MongoArtworkRepositoryIT {
 	void testFindArtworkNotFound() {
 		assertThat(repository.findById("507f1f77bcf86cd799439011")).isEmpty();
 	}
+	@Test
+	@DisplayName("Should find all artworks")
+	void testFindAllArtworks() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		Artwork artwork2 = new Artwork("Persistence of Memory", "Dali", 2000.0);
+		repository.save(artwork1);
+		repository.save(artwork2);
+
+		List<Artwork> artworks = repository.findAll();
+
+		assertThat(artworks).hasSize(2);
+	}
