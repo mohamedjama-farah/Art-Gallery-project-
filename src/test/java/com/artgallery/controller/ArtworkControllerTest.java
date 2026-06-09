@@ -120,3 +120,7 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> controller.updateArtwork(null))
             .isInstanceOf(NullPointerException.class).hasMessage("Artwork cannot be null");
     }
+    @Test void testGetNullIdThrowsException() {
+        assertThatThrownBy(() -> controller.getArtworkById(null))
+            .isInstanceOf(NullPointerException.class).hasMessage("ID cannot be null");
+    }
