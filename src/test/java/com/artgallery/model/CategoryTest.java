@@ -43,3 +43,12 @@ class CategoryTest {
 		category.setId(id);
 		assertThat(category.getId()).isEqualTo(id);
 	}
+	@Test
+	@DisplayName("Should be equal when all fields match")
+	void testEquality() {
+		Category category1 = new Category("Impressionism");
+		category1.setDescription("A 19th century art movement");
+		Category category2 = new Category("Impressionism");
+		category2.setDescription("A 19th century art movement");
+		assertThat(category1).isEqualTo(category2);
+	}
