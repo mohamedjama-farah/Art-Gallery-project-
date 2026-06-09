@@ -100,8 +100,7 @@ class ArtworkControllerTest {
         List<Artwork> list = Arrays.asList(a1, a2);
         when(mockRepository.findAll()).thenReturn(list);
         List<Artwork> result = controller.getAllArtworks();
-        assertThat(result).hasSize(2);
-        assertThat(result).containsExactly(a1, a2);
+        assertThat(result).hasSize(2).containsExactly(a1, a2);
     }
     @Test void testUpdateArtworkWhenExistingUpdatesAndNotifiesView() {
         Artwork artwork = new Artwork("Updated", "Artist", 500.0);

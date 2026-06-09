@@ -67,8 +67,7 @@ class CategoryControllerTest {
         List<Category> cats = Arrays.asList(new Category("Painting"), new Category("Sculpture"));
         when(mockRepository.findAll()).thenReturn(cats);
         List<Category> result = controller.getAllCategories();
-        assertThat(result).isNotNull();
-        assertThat(result).hasSize(2);
+        assertThat(result).isNotNull().hasSize(2);
         assertThat(result.get(0).getName()).isEqualTo("Painting");
         assertThat(result.get(1).getName()).isEqualTo("Sculpture");
         verify(mockRepository).findAll();
@@ -141,8 +140,7 @@ class CategoryControllerTest {
         );
         when(mockRepository.findAll()).thenReturn(cats);
         List<Category> result = controller.getAllCategories();
-        assertThat(result).hasSize(3);
-        assertThat(result).containsExactlyElementsOf(cats);
+        assertThat(result).hasSize(3).containsExactlyElementsOf(cats);
     }
     @Test
     void testUpdateCategorySuccessfully() {
