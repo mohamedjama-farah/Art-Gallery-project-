@@ -311,3 +311,11 @@ public class ArtGalleryFrameTest {
         frame.artworkAdded(a2);
         assertThat(frame.listModel.getSize()).isEqualTo(2);
     }
+    @Test public void testRemoveArtworkByContent() {
+        Artwork a = new Artwork("Test", "Artist", 100.0);
+        frame.artworkAdded(a);
+        String item = frame.listModel.get(0);
+        assertThat(item).contains(a.getId()).contains("Test");
+        frame.artworkRemoved(a);
+        assertThat(frame.listModel.getSize()).isZero();
+    }
