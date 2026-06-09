@@ -75,3 +75,13 @@ public class ArtGalleryFrameTest {
         frame.showError("Error message", null);
         assertThat(frame.errorLabel.getText()).isEqualTo("Error message");
     }
+    @Test public void testClearFieldsAfterArtworkAdded() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        frame.titleTextField.setText("Starry Night");
+        frame.artistTextField.setText("Van Gogh");
+        frame.priceTextField.setText("1000.0");
+        frame.artworkAdded(artwork);
+        assertThat(frame.titleTextField.getText()).isEmpty();
+        assertThat(frame.artistTextField.getText()).isEmpty();
+        assertThat(frame.priceTextField.getText()).isEmpty();
+    }
