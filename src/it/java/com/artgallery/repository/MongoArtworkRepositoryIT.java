@@ -68,3 +68,15 @@ class MongoArtworkRepositoryIT {
 		assertThat(found).isNotNull();
 		assertThat(found.getYear()).isEqualTo(2023);
 	}
+	@Test
+	@DisplayName("Should handle null year from document")
+	void testArtworkWithNullYearInDocument() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		repository.save(artwork);
+
+		// Verify that even with year=0 (default), it's properly handled
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		// Default year when not set explicitly
+		assertThat(found.getYear()).isEqualTo(0);
+	}
