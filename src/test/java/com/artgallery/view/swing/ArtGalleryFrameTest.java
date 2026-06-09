@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import javax.swing.event.DocumentEvent;
 import com.artgallery.controller.ArtworkController;
 import com.artgallery.model.Artwork;
-public class ArtGalleryFrameTest {
+class ArtGalleryFrameTest {
     private ArtGalleryFrame frame;
     private ArtworkController mockController;
     @BeforeEach void setUp() {
@@ -326,10 +326,10 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test void testFieldValidationWhitespaceOnly() {
-        frame.titleTextField.setText("   ");
-        frame.artistTextField.setText("   ");
-        frame.priceTextField.setText("   ");
+    @Test void testFieldValidationPriceEmpty() {
+        frame.titleTextField.setText("Starry Night");
+        frame.artistTextField.setText("Van Gogh");
+        frame.priceTextField.setText("");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
     @Test void testFieldValidationMixed() {

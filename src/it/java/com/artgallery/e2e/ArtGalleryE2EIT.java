@@ -1,14 +1,12 @@
 package com.artgallery.e2e;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import static org.mockito.Mockito.mock;
 import com.artgallery.controller.ArtworkController;
 import com.artgallery.view.ArtGalleryView;
 import com.artgallery.controller.CategoryController;
@@ -16,7 +14,6 @@ import com.artgallery.model.Artwork;
 import com.artgallery.model.Category;
 import com.artgallery.repository.MongoArtworkRepository;
 import com.artgallery.repository.MongoCategoryRepository;
-import com.artgallery.view.ArtGalleryView;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 @Testcontainers

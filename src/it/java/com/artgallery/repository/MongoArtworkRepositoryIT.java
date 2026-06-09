@@ -14,7 +14,6 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.artgallery.model.Artwork;
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.bson.Document;
@@ -78,7 +77,7 @@ class MongoArtworkRepositoryIT {
 		Artwork found = repository.findById(artwork.getId()).orElse(null);
 		assertThat(found).isNotNull();
 		// Default year when not set explicitly
-		assertThat(found.getYear()).isEqualTo(0);
+		assertThat(found.getYear()).isZero();
 	}
 	@Test
 	@DisplayName("Should save artwork to database")
@@ -232,7 +231,7 @@ class MongoArtworkRepositoryIT {
 
 		Artwork found = repository.findById(artwork.getId()).orElse(null);
 		assertThat(found).isNotNull();
-		assertThat(found.getYear()).isEqualTo(0);
+		assertThat(found.getYear()).isZero();
 	}
 	@Test
 	@DisplayName("Should handle artwork with null description")
@@ -303,6 +302,6 @@ class MongoArtworkRepositoryIT {
 
 		assertThat(found).isNotNull();
 		// When year is null, setYear should not be called, year defaults to 0
-		assertThat(found.getYear()).isEqualTo(0);
+		assertThat(found.getYear()).isZero();
 	}
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ArtGalleryApp Tests")
-public class ArtGalleryAppTest {
+class ArtGalleryAppTest {
     @Test
     @DisplayName("Should have main method")
     void testMainMethodExists() {
