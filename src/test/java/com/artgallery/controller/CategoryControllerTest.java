@@ -95,3 +95,12 @@ class CategoryControllerTest {
             .isInstanceOf(NullPointerException.class)
             .hasMessage("ID cannot be null");
     }
+    @Test
+    void testUpdateCategory() {
+        Category category = new Category("Painting");
+        category.setId("1");
+        when(mockRepository.findById("1")).thenReturn(Optional.of(category));
+
+        controller.updateCategory(category);
+        verify(mockRepository).update(category);
+    }
