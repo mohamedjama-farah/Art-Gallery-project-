@@ -68,3 +68,9 @@ class CategoryTest {
 		category2.setDescription("Desc1");
 		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
 	}
+	@Test
+	@DisplayName("Should not be equal to null")
+	void testEqualityWithNull() {
+		Category category = new Category("Impressionism");
+		assertThat(category).isNotEqualTo(null);
+	}
