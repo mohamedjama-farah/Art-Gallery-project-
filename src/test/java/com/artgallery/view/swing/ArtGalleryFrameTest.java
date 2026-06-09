@@ -435,3 +435,17 @@ public class ArtGalleryFrameTest {
         // Verify button state is maintained after changedUpdate
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testDocumentListenerChangedUpdateDisablesButton() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        // Invoke changedUpdate - should not change button state since artist is empty
+        DocumentEvent mockEvent = mock(DocumentEvent.class);
+        frame.documentListener.changedUpdate(mockEvent);
+
+        // Button should still be disabled
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
+}
