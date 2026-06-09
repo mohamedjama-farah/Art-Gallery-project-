@@ -1,0 +1,34 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.c9/
+*.launch
+*.sublime-workspace
+# NOTE: .project, .classpath, .settings/ are intentionally tracked
+# (required Eclipse metadata per AST exam guidelines)
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+.coverage
+coverage.xml
+*.lcov
+
+# SonarCloud
+.sonarcloud.properties
+sonar-project.properties

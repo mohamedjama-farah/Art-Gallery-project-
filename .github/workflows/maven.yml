@@ -1,0 +1,13 @@
+# This workflow has been superseded by build.yml — please delete this file.
+# It is disabled below by targeting a non-existent branch.
+name: DEPRECATED
+
+on:
+  push:
+    branches: [ _disabled_ ]
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "This workflow is deprecated. Delete maven.yml and use build.yml."
