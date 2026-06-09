@@ -118,3 +118,12 @@ class ArtworkTest {
 		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
 		assertThat(artwork).isNotEqualTo("Not an artwork");
 	}
+	@Test
+	@DisplayName("Should not be equal when description differs")
+	void testInequalityWithDifferentDescription() {
+		Artwork artwork1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork1.setDescription("Desc1");
+		Artwork artwork2 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork2.setDescription("Desc2");
+		assertThat(artwork1).isNotEqualTo(artwork2);
+	}
