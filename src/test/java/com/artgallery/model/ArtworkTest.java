@@ -23,3 +23,10 @@ class ArtworkTest {
 				.isInstanceOf(NullPointerException.class)
 				.hasMessage("Title cannot be null");
 	}
+	@Test
+	@DisplayName("Should throw exception when artist is null")
+	void testArtworkNullArtist() {
+		assertThatThrownBy(() -> new Artwork("Starry Night", null, 1000.0))
+				.isInstanceOf(NullPointerException.class)
+				.hasMessage("Artist cannot be null");
+	}
