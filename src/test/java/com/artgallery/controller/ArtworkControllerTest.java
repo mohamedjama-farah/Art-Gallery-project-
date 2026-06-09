@@ -62,3 +62,9 @@ class ArtworkControllerTest {
         inOrder.verify(mockRepository).delete("test-id-123");
         inOrder.verify(mockView).artworkRemoved(artwork);
     }
+    @Test void testDeleteArtworkWhenNotExistingShowsError() {
+        when(mockRepository.findById("999")).thenReturn(Optional.empty());
+        controller.deleteArtwork("999");
+        verify(mockView).showError("No existing artwork with id 999", null);
+        verifyNoMoreInteractions(mockView);
+    }
