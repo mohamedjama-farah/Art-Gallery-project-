@@ -44,3 +44,8 @@ class ArtGalleryE2EIT {
         assertThat(retrieved.getPrice()).isEqualTo(1000.0);
         assertThat(retrieved.getYear()).isEqualTo(1889);
     }
+    @Test void testListAllArtworks() {
+        artworkController.addArtwork(new Artwork("Starry Night", "Van Gogh", 1000.0));
+        artworkController.addArtwork(new Artwork("The Kiss", "Klimt", 2000.0));
+        assertThat(artworkController.getAllArtworks()).hasSize(2);
+    }
