@@ -37,3 +37,9 @@ class ArtworkTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Price cannot be negative");
 	}
+	@Test
+	@DisplayName("Should accept zero price")
+	void testArtworkZeroPrice() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 0.0);
+		assertThat(artwork.getPrice()).isZero();
+	}
