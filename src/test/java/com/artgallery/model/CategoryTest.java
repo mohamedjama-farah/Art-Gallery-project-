@@ -109,3 +109,9 @@ class CategoryTest {
 		Category category2 = new Category("Cat2");
 		assertThat(category1.hashCode()).isNotEqualTo(category2.hashCode());
 	}
+	@Test
+	@DisplayName("Should compare with self")
+	void testEqualityWithSelf() {
+		Category category = new Category("Test");
+		assertThat(category).isEqualTo(category);
+	}
