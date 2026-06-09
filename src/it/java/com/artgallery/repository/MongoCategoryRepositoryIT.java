@@ -55,3 +55,14 @@ class MongoCategoryRepositoryIT {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("Invalid ID format: not-a-valid-objectid");
 	}
+	@Test
+	@DisplayName("Should save category to database")
+	void testSaveCategory() {
+		Category category = new Category("Painting");
+		category.setDescription("Oil and watercolor paintings");
+
+		repository.save(category);
+
+		assertThat(category.getId()).isNotNull();
+		assertThat(category.getId()).isNotEmpty();
+	}
