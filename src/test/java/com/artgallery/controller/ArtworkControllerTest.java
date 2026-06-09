@@ -124,3 +124,12 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> controller.getArtworkById(null))
             .isInstanceOf(NullPointerException.class).hasMessage("ID cannot be null");
     }
+    @Test void testAddArtworkWithIdNotExistingInRepository() {
+        Artwork artwork = new Artwork("New", "Artist", 100.0);
+        artwork.setId("new-id-123");
+        when(mockRepository.findById("new-id-123")).thenReturn(Optional.empty());
+        controller.addArtwork(artwork);
+        verify(mockRepository).save(artwork);
+        verify(mockView).artworkAdded(artwork);
+        verify(mockView, never()).showError(anyString(), any());
+    }
