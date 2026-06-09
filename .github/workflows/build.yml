@@ -26,7 +26,7 @@ jobs:
       run: sudo apt-get install -y xvfb
 
     - name: Build and Test
-      run: xvfb-run --auto-servernum mvn clean verify -B
+      run: xvfb-run --auto-servernum mvn clean verify sonar:sonar -B -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=mohamedjama-farah_Art-Gallery-project- -Dsonar.organization=mohamedjama-farah -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
     - name: Upload to Coveralls
       uses: coverallsapp/github-action@v2
