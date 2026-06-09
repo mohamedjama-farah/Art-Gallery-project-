@@ -150,3 +150,10 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("The Kiss", "Van Gogh", 1000.0);
 		assertThat(artwork1).isNotEqualTo(artwork2);
 	}
+	@Test
+	@DisplayName("Should have toString representation")
+	void testToString() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		String str = artwork.toString();
+		assertThat(str).contains("Starry Night").contains("Van Gogh").contains("1000.0");
+	}
