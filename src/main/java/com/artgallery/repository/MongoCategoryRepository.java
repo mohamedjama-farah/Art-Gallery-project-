@@ -63,13 +63,10 @@ public class MongoCategoryRepository implements CategoryRepository {
 		Objects.requireNonNull(id, "ID cannot be null");
 		try {
 			Document doc = collection.find(Filters.eq("_id", new ObjectId(id))).first();
-			if (doc != null) {
-				return Optional.of(documentToCategory(doc));
-			}
+			return doc != null ? Optional.of(documentToCategory(doc)) : Optional.empty();
 		} catch (IllegalArgumentException e) {
 			return Optional.empty();
 		}
-		return Optional.empty();
 	}
 
 	/**

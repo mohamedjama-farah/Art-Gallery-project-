@@ -8,6 +8,9 @@ import java.util.UUID;
  * Contains information about title, artist, price, year, and description.
  */
 public class Artwork {
+	private static final int MIN_YEAR = 1000;
+	private static final int MAX_YEAR = 2100;
+
 	private String id;
 	private String title;
 	private String artist;
@@ -86,7 +89,7 @@ public class Artwork {
 	 * @throws IllegalArgumentException if year is out of valid range
 	 */
 	public void setYear(int year) {
-		if (year < 1000 || year > 2100) {
+		if (year < MIN_YEAR || year > MAX_YEAR) {
 			throw new IllegalArgumentException("Invalid year");
 		}
 		this.year = year;
@@ -124,12 +127,9 @@ public class Artwork {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if (!(obj instanceof Artwork)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Artwork other = (Artwork) obj;
 		return Objects.equals(artist, other.artist) && Objects.equals(description, other.description)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)

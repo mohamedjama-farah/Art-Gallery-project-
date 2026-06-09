@@ -79,12 +79,9 @@ public class Category {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if (!(obj instanceof Category)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Category other = (Category) obj;
 		return Objects.equals(description, other.description) && Objects.equals(name, other.name);
 	}

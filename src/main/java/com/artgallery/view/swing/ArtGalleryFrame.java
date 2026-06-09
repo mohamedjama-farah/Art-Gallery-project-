@@ -25,6 +25,8 @@ import com.artgallery.view.ArtGalleryView;
  */
 public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
     private static final long serialVersionUID = 1L;
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 400;
     private transient ArtworkController controller;
     JTextField titleTextField;
     JTextField artistTextField;
@@ -42,7 +44,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
     public ArtGalleryFrame() {
         setTitle("Art Gallery Management System");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         initializeComponents();
         setupLayout();
         setupListeners();

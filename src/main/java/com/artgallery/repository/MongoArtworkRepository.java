@@ -63,13 +63,10 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		Objects.requireNonNull(id, "ID cannot be null");
 		try {
 			Document doc = collection.find(Filters.eq("_id", new ObjectId(id))).first();
-			if (doc != null) {
-				return Optional.of(documentToArtwork(doc));
-			}
+			return doc != null ? Optional.of(documentToArtwork(doc)) : Optional.empty();
 		} catch (IllegalArgumentException e) {
 			return Optional.empty();
 		}
-		return Optional.empty();
 	}
 
 	/**
@@ -129,7 +126,7 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		Artwork artwork = new Artwork(doc.getString("title"), doc.getString("artist"), doc.getDouble("price"));
 		artwork.setId(doc.getObjectId("_id").toString());
 		Integer year = doc.getInteger("year");
-		if (year != null && year != 0) {
+		if (year != null && !year.equals(0)) {
 			artwork.setYear(year);
 		}
 		artwork.setDescription(doc.getString("description"));

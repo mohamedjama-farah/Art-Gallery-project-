@@ -1,6 +1,7 @@
 package com.artgallery.controller;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import com.artgallery.model.Artwork;
 import com.artgallery.repository.ArtworkRepository;
 import com.artgallery.view.ArtGalleryView;
@@ -50,7 +51,7 @@ public class ArtworkController {
      */
     public void deleteArtwork(String id) {
         Objects.requireNonNull(id, "ID cannot be null");
-        java.util.Optional<Artwork> found = repository.findById(id);
+        Optional<Artwork> found = repository.findById(id);
         if (!found.isPresent()) {
             view.showError("No existing artwork with id " + id, null);
             return;
