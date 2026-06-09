@@ -179,3 +179,10 @@ class ArtworkTest {
 		artwork.setYear(2100);
 		assertThat(artwork.getYear()).isEqualTo(2100);
 	}
+	@Test
+	@DisplayName("Should be equal when description is null")
+	void testEqualityBothWithNullDescription() {
+		Artwork artwork1 = new Artwork("Test", "Artist", 100.0);
+		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
+		assertThat(artwork1).isEqualTo(artwork2);
+	}
