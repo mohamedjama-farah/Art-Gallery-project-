@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import com.artgallery.controller.ArtworkController;
@@ -30,7 +31,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
     transient DocumentListener documentListener;
     public ArtGalleryFrame() {
         setTitle("Art Gallery Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(600, 400);
         listModel = new DefaultListModel<>();
         artworkList = new JList<>(listModel);
@@ -87,12 +88,12 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
         public void insertUpdate(DocumentEvent e) { updateAddButton(); }
         public void removeUpdate(DocumentEvent e) { updateAddButton(); }
         public void changedUpdate(DocumentEvent e) { updateAddButton(); }
-    }
-    private void updateAddButton() {
-        addButton.setEnabled(
-            !titleTextField.getText().trim().isEmpty() &&
-            !artistTextField.getText().trim().isEmpty() &&
-            !priceTextField.getText().trim().isEmpty());
+        private void updateAddButton() {
+            addButton.setEnabled(
+                !titleTextField.getText().trim().isEmpty() &&
+                !artistTextField.getText().trim().isEmpty() &&
+                !priceTextField.getText().trim().isEmpty());
+        }
     }
     public void setController(ArtworkController controller) {
         this.controller = controller;
