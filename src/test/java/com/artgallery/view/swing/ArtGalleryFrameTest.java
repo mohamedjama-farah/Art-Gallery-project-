@@ -375,3 +375,8 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("100.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testDeleteButtonNoSelection() {
+        frame.artworkList.setSelectedIndex(-1);
+        frame.deleteButton.doClick();
+        verify(mockController, never()).deleteArtwork(any(String.class));
+    }
