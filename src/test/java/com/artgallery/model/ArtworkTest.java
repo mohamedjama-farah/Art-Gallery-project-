@@ -112,3 +112,9 @@ class ArtworkTest {
 		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
 		assertThat(artwork).isNotEqualTo(null);
 	}
+	@Test
+	@DisplayName("Should not be equal to different type")
+	void testEqualityWithDifferentType() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		assertThat(artwork).isNotEqualTo("Not an artwork");
+	}
