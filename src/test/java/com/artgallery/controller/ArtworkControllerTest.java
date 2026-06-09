@@ -53,3 +53,12 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> controller.addArtwork(null))
             .isInstanceOf(NullPointerException.class).hasMessage("Artwork cannot be null");
     }
+    @Test void testDeleteArtworkWhenExistingDeletesAndNotifiesView() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        artwork.setId("test-id-123");
+        when(mockRepository.findById("test-id-123")).thenReturn(Optional.of(artwork));
+        controller.deleteArtwork("test-id-123");
+        InOrder inOrder = inOrder(mockRepository, mockView);
+        inOrder.verify(mockRepository).delete("test-id-123");
+        inOrder.verify(mockView).artworkRemoved(artwork);
+    }
