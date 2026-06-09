@@ -43,3 +43,10 @@ class ArtworkTest {
 		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 0.0);
 		assertThat(artwork.getPrice()).isZero();
 	}
+	@Test
+	@DisplayName("Should set year with validation")
+	void testSetYearValid() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork.setYear(1889);
+		assertThat(artwork.getYear()).isEqualTo(1889);
+	}
