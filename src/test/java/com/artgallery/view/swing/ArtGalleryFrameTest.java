@@ -22,3 +22,6 @@ public class ArtGalleryFrameTest {
         frame = new ArtGalleryFrame();
         frame.setController(mockController);
     }
+    @Test public void testAddButtonIsDisabledWhenFieldsAreEmpty() {
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
