@@ -80,3 +80,12 @@ class CategoryTest {
 		Category category = new Category("Impressionism");
 		assertThat(category).isNotEqualTo("Not a category");
 	}
+	@Test
+	@DisplayName("Should not be equal when description differs")
+	void testInequalityWithDifferentDescription() {
+		Category category1 = new Category("Impressionism");
+		category1.setDescription("Desc1");
+		Category category2 = new Category("Impressionism");
+		category2.setDescription("Desc2");
+		assertThat(category1).isNotEqualTo(category2);
+	}
