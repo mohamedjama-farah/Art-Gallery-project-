@@ -38,3 +38,9 @@ class CategoryControllerTest {
         controller.addCategory(category);
         verify(mockRepository).save(category);
     }
+    @Test
+    void testAddNullCategoryThrowsException() {
+        assertThatThrownBy(() -> controller.addCategory(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("Category cannot be null");
+    }
