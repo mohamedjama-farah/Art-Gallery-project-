@@ -122,3 +122,12 @@ class CategoryTest {
 		Category category2 = new Category("Test");
 		assertThat(category1).isEqualTo(category2);
 	}
+	@Test
+	@DisplayName("Should have hash code consistent with equals")
+	void testHashCodeConsistency() {
+		Category category1 = new Category("Test");
+		category1.setDescription("Desc");
+		Category category2 = new Category("Test");
+		category2.setDescription("Desc");
+		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
+	}
