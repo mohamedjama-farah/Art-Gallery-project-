@@ -109,3 +109,9 @@ public class ArtGalleryFrameTest {
         frame.artworkRemoved(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
+    @Test public void testButtonEnableStateWithWhitespaceOnly() {
+        frame.titleTextField.setText("   ");
+        frame.artistTextField.setText("   ");
+        frame.priceTextField.setText("   ");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+    }
