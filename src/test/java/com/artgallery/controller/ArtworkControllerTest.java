@@ -91,7 +91,8 @@ class ArtworkControllerTest {
     @Test void testGetArtworkByIdNotFoundThrowsException() {
         when(mockRepository.findById("nonexistent")).thenReturn(Optional.empty());
         assertThatThrownBy(() -> controller.getArtworkById("nonexistent"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Artwork not found: nonexistent");
     }
     @Test void testGetAllArtworksReturnsRepositoryList() {
         Artwork a1 = new Artwork("A1", "Artist1", 100.0);

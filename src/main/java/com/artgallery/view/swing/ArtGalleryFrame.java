@@ -136,9 +136,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
         if (idx >= 0) {
             String item = listModel.getElementAt(idx);
             String[] parts = item.split(" - ", 2);
-            if (parts.length > 0) {
-                controller.deleteArtwork(parts[0]);
-            }
+            controller.deleteArtwork(parts[0]);
         }
     }
 

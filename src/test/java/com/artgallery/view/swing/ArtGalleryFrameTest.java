@@ -6,8 +6,12 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.any;
 import java.util.Arrays;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.Arguments;
 import javax.swing.event.DocumentEvent;
 import com.artgallery.controller.ArtworkController;
 import com.artgallery.model.Artwork;
@@ -29,20 +33,20 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("1000.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
-    @Test void testAddButtonDisabledWhenTitleEmpty() {
-        frame.artistTextField.setText("Van Gogh");
-        frame.priceTextField.setText("1000.0");
+    @ParameterizedTest
+    @MethodSource("provideDisabledButtonCases")
+    void testAddButtonDisabledWhenFieldMissing(String title, String artist, String price) {
+        frame.titleTextField.setText(title);
+        frame.artistTextField.setText(artist);
+        frame.priceTextField.setText(price);
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
-    @Test void testAddButtonDisabledWhenArtistEmpty() {
-        frame.titleTextField.setText("Starry Night");
-        frame.priceTextField.setText("1000.0");
-        assertThat(frame.addButton.isEnabled()).isFalse();
-    }
-    @Test void testAddButtonDisabledWhenPriceEmpty() {
-        frame.titleTextField.setText("Starry Night");
-        frame.artistTextField.setText("Van Gogh");
-        assertThat(frame.addButton.isEnabled()).isFalse();
+    static Stream<Arguments> provideDisabledButtonCases() {
+        return Stream.of(
+            Arguments.of("", "Van Gogh", "1000.0"),
+            Arguments.of("Starry Night", "", "1000.0"),
+            Arguments.of("Starry Night", "Van Gogh", "")
+        );
     }
     @Test void testShowAllArtworksPopulatesList() {
         Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
