@@ -289,3 +289,6 @@ public class ArtGalleryFrameTest {
     @Test public void testDeleteButtonName() {
         assertThat(frame.deleteButton.getName()).isEqualTo("deleteButton");
     }
+    @Test public void testTitleTextFieldName() {
+        assertThat(frame.titleTextField.getName()).isEqualTo("titleTextField");
+    }
