@@ -223,3 +223,14 @@ class MongoArtworkRepositoryIT {
 		assertThat(found.getTitle()).isEqualTo("Original");
 		assertThat(found.getYear()).isEqualTo(2000);
 	}
+	@Test
+	@DisplayName("Should handle artwork with zero year")
+	void testArtworkWithZeroYear() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		// Year defaults to 0, don't set it
+		repository.save(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getYear()).isEqualTo(0);
+	}
