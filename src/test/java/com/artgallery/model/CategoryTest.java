@@ -115,3 +115,10 @@ class CategoryTest {
 		Category category = new Category("Test");
 		assertThat(category).isEqualTo(category);
 	}
+	@Test
+	@DisplayName("Should be equal with same name and null descriptions")
+	void testEqualityBothWithNullDescription() {
+		Category category1 = new Category("Test");
+		Category category2 = new Category("Test");
+		assertThat(category1).isEqualTo(category2);
+	}
