@@ -146,3 +146,13 @@ class CategoryTest {
 		category.setId("id-123");
 		assertThat(category.getId()).isEqualTo("id-123");
 	}
+	@Test
+	@DisplayName("Should have different hashCode for different descriptions")
+	void testHashCodeWithDifferentDescriptions() {
+		Category category1 = new Category("Test");
+		category1.setDescription("Desc1");
+		Category category2 = new Category("Test");
+		category2.setDescription("Desc2");
+		assertThat(category1.hashCode()).isNotEqualTo(category2.hashCode());
+	}
+}
