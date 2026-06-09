@@ -52,3 +52,10 @@ class CategoryTest {
 		category2.setDescription("A 19th century art movement");
 		assertThat(category1).isEqualTo(category2);
 	}
+	@Test
+	@DisplayName("Should not be equal when names differ")
+	void testInequality() {
+		Category category1 = new Category("Impressionism");
+		Category category2 = new Category("Modern Art");
+		assertThat(category1).isNotEqualTo(category2);
+	}
