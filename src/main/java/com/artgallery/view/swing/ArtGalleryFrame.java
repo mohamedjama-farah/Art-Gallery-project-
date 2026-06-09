@@ -115,10 +115,6 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
      * Handles the add artwork button click event.
      */
     private void handleAddArtwork() {
-        if (controller == null) {
-            errorLabel.setText("Controller not initialized");
-            return;
-        }
         try {
             double price = Double.parseDouble(priceTextField.getText());
             Artwork artwork = new Artwork(
@@ -136,10 +132,6 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
      * Handles the delete artwork button click event.
      */
     private void handleDeleteArtwork() {
-        if (controller == null) {
-            errorLabel.setText("Controller not initialized");
-            return;
-        }
         int idx = artworkList.getSelectedIndex();
         if (idx >= 0) {
             String item = listModel.getElementAt(idx);
