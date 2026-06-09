@@ -8,3 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 
 @DisplayName("Category Model Tests")
 class CategoryTest {
+	@Test
+	@DisplayName("Should create category with valid name")
+	void testCategoryCreation() {
+		Category category = new Category("Impressionism");
+		assertThat(category.getName()).isEqualTo("Impressionism");
+	}
