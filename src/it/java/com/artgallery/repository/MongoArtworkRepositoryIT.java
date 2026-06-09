@@ -171,3 +171,8 @@ class MongoArtworkRepositoryIT {
 		assertThatThrownBy(() -> repository.update(null))
 			.isInstanceOf(NullPointerException.class);
 	}
+	@Test
+	@DisplayName("Should handle invalid ID format in findById")
+	void testFindByIdInvalidFormat() {
+		assertThat(repository.findById("not-a-valid-id")).isEmpty();
+	}
