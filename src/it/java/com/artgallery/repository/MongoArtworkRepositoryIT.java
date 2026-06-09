@@ -123,3 +123,13 @@ class MongoArtworkRepositoryIT {
 
 		assertThat(artworks).hasSize(2);
 	}
+	@Test
+	@DisplayName("Should delete artwork by ID")
+	void testDeleteArtwork() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		repository.save(artwork);
+
+		repository.delete(artwork.getId());
+
+		assertThat(repository.findById(artwork.getId())).isEmpty();
+	}
