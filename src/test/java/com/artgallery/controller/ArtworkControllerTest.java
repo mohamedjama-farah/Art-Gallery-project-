@@ -68,3 +68,7 @@ class ArtworkControllerTest {
         verify(mockView).showError("No existing artwork with id 999", null);
         verifyNoMoreInteractions(mockView);
     }
+    @Test void testDeleteNullIdThrowsException() {
+        assertThatThrownBy(() -> controller.deleteArtwork(null))
+            .isInstanceOf(NullPointerException.class).hasMessage("ID cannot be null");
+    }
