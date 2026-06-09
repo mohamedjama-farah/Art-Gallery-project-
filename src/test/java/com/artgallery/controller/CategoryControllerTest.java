@@ -126,3 +126,9 @@ class CategoryControllerTest {
             .isInstanceOf(NullPointerException.class)
             .hasMessage("Category cannot be null");
     }
+    @Test
+    void testGetAllCategoriesReturnsEmptyList() {
+        when(mockRepository.findAll()).thenReturn(Arrays.asList());
+        List<Category> result = controller.getAllCategories();
+        assertThat(result).isEmpty();
+    }
