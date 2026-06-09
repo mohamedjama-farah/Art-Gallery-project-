@@ -193,3 +193,9 @@ class ArtworkTest {
 		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
 		assertThat(artwork1.getId()).isNotEqualTo(artwork2.getId());
 	}
+	@Test
+	@DisplayName("Should preserve zero price")
+	void testZeroPricePreserved() {
+		Artwork artwork = new Artwork("Test", "Artist", 0.0);
+		assertThat(artwork.getPrice()).isZero();
+	}
