@@ -14,3 +14,10 @@ class CategoryTest {
 		Category category = new Category("Impressionism");
 		assertThat(category.getName()).isEqualTo("Impressionism");
 	}
+	@Test
+	@DisplayName("Should throw exception when name is null")
+	void testCategoryNullName() {
+		assertThatThrownBy(() -> new Category(null))
+				.isInstanceOf(NullPointerException.class)
+				.hasMessage("Name cannot be null");
+	}
