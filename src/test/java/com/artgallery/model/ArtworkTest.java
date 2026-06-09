@@ -157,3 +157,10 @@ class ArtworkTest {
 		String str = artwork.toString();
 		assertThat(str).contains("Starry Night").contains("Van Gogh").contains("1000.0");
 	}
+	@Test
+	@DisplayName("Should have different hashCode for different objects")
+	void testHashCodeDifference() {
+		Artwork artwork1 = new Artwork("A1", "Artist1", 100.0);
+		Artwork artwork2 = new Artwork("A2", "Artist2", 200.0);
+		assertThat(artwork1.hashCode()).isNotEqualTo(artwork2.hashCode());
+	}
