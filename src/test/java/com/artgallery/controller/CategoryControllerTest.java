@@ -54,3 +54,11 @@ class CategoryControllerTest {
         assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo("Painting");
     }
+    @Test
+    void testGetCategoryByIdNotFound() {
+        when(mockRepository.findById("999")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> controller.getCategoryById("999"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Category not found: 999");
+    }
