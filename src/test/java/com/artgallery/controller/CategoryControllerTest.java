@@ -81,3 +81,11 @@ class CategoryControllerTest {
         controller.deleteCategory("1");
         verify(mockRepository).delete("1");
     }
+    @Test
+    void testDeleteCategoryNotFound() {
+        when(mockRepository.findById("999")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> controller.deleteCategory("999"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Category not found: 999");
+    }
