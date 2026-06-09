@@ -245,3 +245,17 @@ class MongoArtworkRepositoryIT {
 		assertThat(found).isNotNull();
 		assertThat(found.getDescription()).isNull();
 	}
+	@Test
+	@DisplayName("Should update artwork with null description")
+	void testUpdateArtworkWithNullDescription() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		artwork.setDescription("Original");
+		repository.save(artwork);
+
+		artwork.setDescription(null);
+		repository.update(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getDescription()).isNull();
+	}
