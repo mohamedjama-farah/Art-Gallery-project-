@@ -146,3 +146,15 @@ class ArtworkControllerTest {
         order.verify(mockView).artworkAdded(artwork);
         verify(mockView, never()).showError(anyString(), any());
     }
+    @Test void testAddArtworkWithNullIdSkipsFindById() {
+        Artwork artwork = new Artwork("Test", "Artist", 100.0);
+        artwork.setId(null);  // Explicitly set to null to test the getId() != null branch
+
+        controller.addArtwork(artwork);
+
+        // When ID is null, condition fails at first part (short-circuit), so we just save
+        verify(mockRepository, never()).findById(null);
+        verify(mockRepository).save(artwork);
+        verify(mockView).artworkAdded(artwork);
+    }
+}
