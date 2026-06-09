@@ -89,3 +89,10 @@ public class ArtGalleryFrameTest {
         frame.showAllArtworks(Arrays.asList());
         assertThat(frame.listModel.size()).isEqualTo(0);
     }
+    @Test public void testMultipleArtworksAdded() {
+        Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
+        frame.artworkAdded(a1);
+        frame.artworkAdded(a2);
+        assertThat(frame.listModel.size()).isEqualTo(2);
+    }
