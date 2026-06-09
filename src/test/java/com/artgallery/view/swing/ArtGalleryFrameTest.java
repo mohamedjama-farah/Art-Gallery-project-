@@ -391,3 +391,15 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("99.99");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testDocumentListenerRemoveUpdatePath() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("100");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+
+        frame.titleTextField.setText("");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.titleTextField.setText("Title");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
