@@ -169,3 +169,9 @@ public class ArtGalleryFrameTest {
         frame.priceTextField.setText("0.0");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testAddButtonWithTrimmedWhitespace() {
+        frame.titleTextField.setText("  Title  ");
+        frame.artistTextField.setText("  Artist  ");
+        frame.priceTextField.setText("  100.0  ");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
