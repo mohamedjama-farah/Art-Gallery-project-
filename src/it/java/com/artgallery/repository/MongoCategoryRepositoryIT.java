@@ -16,3 +16,24 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import com.artgallery.model.Category;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+
+@Testcontainers
+@DisplayName("MongoCategoryRepository Integration Tests")
+class MongoCategoryRepositoryIT {
+	@Container
+	static MongoDBContainer mongoContainer = new MongoDBContainer("mongo:6.0");
+
+	private MongoCategoryRepository repository;
+	private MongoClient mongoClient;
+
+	@BeforeAll
+	static void setupContainer() {
+		mongoContainer.start();
+	}
+
+	@BeforeEach
+	void setUp() {
+		mongoClient = MongoClients.create(mongoContainer.getReplicaSetUrl());
+		repository = new MongoCategoryRepository(mongoClient, "artgallery_test");
+		repository.findAll().forEach(c -> repository.delete(c.getId()));
+	}
