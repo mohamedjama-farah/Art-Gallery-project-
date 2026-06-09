@@ -350,3 +350,10 @@ public class ArtGalleryFrameTest {
         frame.addButton.doClick();
         verify(mockController).addArtwork(any(Artwork.class));
     }
+    @Test public void testDeleteButtonActionListener() {
+        Artwork artwork = new Artwork("Test", "Artist", 100.0);
+        frame.artworkAdded(artwork);
+        frame.artworkList.setSelectedIndex(0);
+        frame.deleteButton.doClick();
+        verify(mockController).deleteArtwork(any(String.class));
+    }
