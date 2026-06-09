@@ -109,3 +109,10 @@ class ArtworkControllerTest {
         controller.updateArtwork(artwork);
         verify(mockRepository).update(artwork);
     }
+    @Test void testUpdateArtworkWhenNotExistingShowsError() {
+        Artwork artwork = new Artwork("Test", "Artist", 100.0);
+        artwork.setId("nonexistent");
+        when(mockRepository.findById("nonexistent")).thenReturn(Optional.empty());
+        controller.updateArtwork(artwork);
+        verify(mockView).showError("No existing artwork with id nonexistent", artwork);
+    }
