@@ -380,3 +380,14 @@ public class ArtGalleryFrameTest {
         frame.deleteButton.doClick();
         verify(mockController, never()).deleteArtwork(any(String.class));
     }
+    @Test public void testDocumentListenerInsertUpdatePath() {
+        frame.titleTextField.setText("T");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.priceTextField.setText("99.99");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
