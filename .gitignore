@@ -31,4 +31,3 @@ coverage.xml
 
 # SonarCloud
 .sonarcloud.properties
-sonar-project.properties
