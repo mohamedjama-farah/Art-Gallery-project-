@@ -200,3 +200,17 @@ class MongoCategoryRepositoryIT {
 		assertThat(found.getDescription()).isEqualTo("Updated Description");
 		assertThat(found.getName()).isEqualTo("Original");
 	}
+	@Test
+	@DisplayName("Should update category with null description")
+	void testUpdateWithNullDescription() {
+		Category category = new Category("Test");
+		category.setDescription("Original");
+		repository.save(category);
+
+		category.setDescription(null);
+		repository.update(category);
+
+		Category found = repository.findById(category.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getDescription()).isNull();
+	}
