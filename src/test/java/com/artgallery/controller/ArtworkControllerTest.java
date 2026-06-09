@@ -72,3 +72,11 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> controller.deleteArtwork(null))
             .isInstanceOf(NullPointerException.class).hasMessage("ID cannot be null");
     }
+    @Test void testAllArtworksCallsViewWithCorrectList() {
+        Artwork a1 = new Artwork("A1", "Artist1", 100.0);
+        Artwork a2 = new Artwork("A2", "Artist2", 200.0);
+        List<Artwork> list = Arrays.asList(a1, a2);
+        when(mockRepository.findAll()).thenReturn(list);
+        controller.allArtworks();
+        verify(mockView).showAllArtworks(list);
+    }
