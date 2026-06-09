@@ -96,3 +96,9 @@ class CategoryTest {
 		String str = category.toString();
 		assertThat(str).contains("Impressionism");
 	}
+	@Test
+	@DisplayName("Should return null description by default")
+	void testDefaultDescription() {
+		Category category = new Category("Modern Art");
+		assertThat(category.getDescription()).isNull();
+	}
