@@ -365,3 +365,13 @@ public class ArtGalleryFrameTest {
         frame.addButton.doClick();
         assertThat(frame.errorLabel.getText()).contains("Invalid price");
     }
+    @Test public void testDocumentListenerChangedUpdate() {
+        frame.titleTextField.setText("Title");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.artistTextField.setText("Artist");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.priceTextField.setText("100.0");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
