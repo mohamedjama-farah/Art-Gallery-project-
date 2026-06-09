@@ -30,4 +30,4 @@ coverage.xml
 *.lcov
 
 # SonarCloud
-.sonarcloud.properties
+# .sonarcloud.properties is needed for SonarCloud Automatic Analysis
