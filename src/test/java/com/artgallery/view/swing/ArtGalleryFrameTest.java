@@ -357,3 +357,11 @@ public class ArtGalleryFrameTest {
         frame.deleteButton.doClick();
         verify(mockController).deleteArtwork(any(String.class));
     }
+    @Test public void testAddButtonInvalidPrice() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("invalid");
+        frame.addButton.setEnabled(true);
+        frame.addButton.doClick();
+        assertThat(frame.errorLabel.getText()).contains("Invalid price");
+    }
