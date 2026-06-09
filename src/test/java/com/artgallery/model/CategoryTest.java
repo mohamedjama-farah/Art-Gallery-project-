@@ -138,3 +138,11 @@ class CategoryTest {
 		String str = category.toString();
 		assertThat(str).contains("ImportantCategory");
 	}
+	@Test
+	@DisplayName("Should set and get ID properly")
+	void testIdManagement() {
+		Category category = new Category("Test");
+		assertThat(category.getId()).isNull();
+		category.setId("id-123");
+		assertThat(category.getId()).isEqualTo("id-123");
+	}
