@@ -35,3 +35,12 @@ class ArtGalleryE2EIT {
         artworkController.getAllArtworks().forEach(a -> artworkController.deleteArtwork(a.getId()));
         categoryController.getAllCategories().forEach(c -> categoryController.deleteCategory(c.getId()));
     }
+    @Test void testAddAndRetrieveArtwork() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        artwork.setYear(1889);
+        artworkController.addArtwork(artwork);
+        Artwork retrieved = artworkController.getArtworkById(artwork.getId());
+        assertThat(retrieved.getTitle()).isEqualTo("Starry Night");
+        assertThat(retrieved.getPrice()).isEqualTo(1000.0);
+        assertThat(retrieved.getYear()).isEqualTo(1889);
+    }
