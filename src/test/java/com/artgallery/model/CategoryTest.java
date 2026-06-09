@@ -35,3 +35,11 @@ class CategoryTest {
 		category.setDescription("A 19th century art movement");
 		assertThat(category.getDescription()).isEqualTo("A 19th century art movement");
 	}
+	@Test
+	@DisplayName("Should generate and set ID")
+	void testSetAndGetId() {
+		Category category = new Category("Impressionism");
+		String id = "507f1f77bcf86cd799439012";
+		category.setId(id);
+		assertThat(category.getId()).isEqualTo(id);
+	}
