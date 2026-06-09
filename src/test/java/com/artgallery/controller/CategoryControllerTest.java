@@ -44,3 +44,13 @@ class CategoryControllerTest {
             .isInstanceOf(NullPointerException.class)
             .hasMessage("Category cannot be null");
     }
+    @Test
+    void testGetCategoryById() {
+        Category category = new Category("Painting");
+        when(mockRepository.findById("1")).thenReturn(Optional.of(category));
+
+        Category result = controller.getCategoryById("1");
+        verify(mockRepository).findById("1");
+        assertThat(result).isNotNull();
+        assertThat(result.getName()).isEqualTo("Painting");
+    }
