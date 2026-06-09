@@ -57,3 +57,14 @@ class MongoArtworkRepositoryIT {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("Invalid ID format: not-a-valid-objectid");
 	}
+	@Test
+	@DisplayName("Should handle artwork with non-zero year value")
+	void testArtworkWithNonZeroYear() {
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		artwork.setYear(2023);
+		repository.save(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+		assertThat(found).isNotNull();
+		assertThat(found.getYear()).isEqualTo(2023);
+	}
