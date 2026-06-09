@@ -120,3 +120,9 @@ class MongoCategoryRepositoryIT {
 		assertThat(updated).isNotNull();
 		assertThat(updated.getDescription()).isEqualTo("Updated description");
 	}
+	@Test
+	@DisplayName("Should handle empty database")
+	void testFindAllEmptyDatabase() {
+		List<Category> categories = repository.findAll();
+		assertThat(categories).isEmpty();
+	}
