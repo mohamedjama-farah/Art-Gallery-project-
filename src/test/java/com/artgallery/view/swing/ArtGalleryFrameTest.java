@@ -219,3 +219,18 @@ public class ArtGalleryFrameTest {
     @Test public void testListModelEmpty() {
         assertThat(frame.listModel.getSize()).isZero();
     }
+    @Test public void testAddAndRemoveMultiple() {
+        Artwork a1 = new Artwork("A1", "Artist1", 100.0);
+        Artwork a2 = new Artwork("A2", "Artist2", 200.0);
+        Artwork a3 = new Artwork("A3", "Artist3", 300.0);
+
+        frame.artworkAdded(a1);
+        frame.artworkAdded(a2);
+        frame.artworkAdded(a3);
+        assertThat(frame.listModel.getSize()).isEqualTo(3);
+
+        frame.artworkRemoved(a2);
+        assertThat(frame.listModel.getSize()).isEqualTo(2);
+        assertThat(frame.listModel.get(0)).contains("A1");
+        assertThat(frame.listModel.get(1)).contains("A3");
+    }
