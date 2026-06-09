@@ -116,3 +116,7 @@ class ArtworkControllerTest {
         controller.updateArtwork(artwork);
         verify(mockView).showError("No existing artwork with id nonexistent", artwork);
     }
+    @Test void testUpdateNullArtworkThrowsException() {
+        assertThatThrownBy(() -> controller.updateArtwork(null))
+            .isInstanceOf(NullPointerException.class).hasMessage("Artwork cannot be null");
+    }
