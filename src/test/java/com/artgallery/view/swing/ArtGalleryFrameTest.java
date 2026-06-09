@@ -202,3 +202,6 @@ public class ArtGalleryFrameTest {
     @Test public void testErrorLabelInitiallyBlank() {
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
+    @Test public void testListSelectionMode() {
+        assertThat(frame.artworkList.getSelectionMode()).isEqualTo(0); // SINGLE_SELECTION = 0
+    }
