@@ -71,3 +71,7 @@ public class ArtGalleryFrameTest {
         frame.showError("Already existing", artwork);
         assertThat(frame.errorLabel.getText()).contains("Already existing");
     }
+    @Test public void testShowErrorWithoutArtwork() {
+        frame.showError("Error message", null);
+        assertThat(frame.errorLabel.getText()).isEqualTo("Error message");
+    }
