@@ -149,3 +149,9 @@ class MongoCategoryRepositoryIT {
 		assertThatThrownBy(() -> repository.findById(null))
 			.isInstanceOf(NullPointerException.class);
 	}
+	@Test
+	@DisplayName("Should throw exception when deleting null ID")
+	void testDeleteNullId() {
+		assertThatThrownBy(() -> repository.delete(null))
+			.isInstanceOf(NullPointerException.class);
+	}
