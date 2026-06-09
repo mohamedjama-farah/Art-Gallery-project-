@@ -73,3 +73,11 @@ class ArtworkTest {
 		artwork.setDescription("A painting of a starry night");
 		assertThat(artwork.getDescription()).isEqualTo("A painting of a starry night");
 	}
+	@Test
+	@DisplayName("Should generate unique ID")
+	void testSetAndGetId() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		String id = "507f1f77bcf86cd799439011";
+		artwork.setId(id);
+		assertThat(artwork.getId()).isEqualTo(id);
+	}
