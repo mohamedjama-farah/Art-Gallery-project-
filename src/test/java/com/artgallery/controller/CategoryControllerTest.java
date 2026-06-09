@@ -120,3 +120,9 @@ class CategoryControllerTest {
             .isInstanceOf(NullPointerException.class)
             .hasMessage("ID cannot be null");
     }
+    @Test
+    void testUpdateNullCategoryThrowsException() {
+        assertThatThrownBy(() -> controller.updateCategory(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("Category cannot be null");
+    }
