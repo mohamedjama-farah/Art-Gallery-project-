@@ -75,7 +75,11 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
         deleteButton.addActionListener(e -> {
             int idx = artworkList.getSelectedIndex();
             if (idx >= 0) {
-                controller.deleteArtwork(listModel.getElementAt(idx).split(" - ")[0]);
+                String item = listModel.getElementAt(idx);
+                String[] parts = item.split(" - ", 2);
+                if (parts.length > 0) {
+                    controller.deleteArtwork(parts[0]);
+                }
             }
         });
         documentListener = new FieldChangeListener();
@@ -101,12 +105,16 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
     }
     @Override public void showAllArtworks(List<Artwork> artworks) {
         listModel.clear();
-        for (Artwork a : artworks) listModel.addElement(a.getId() + " - " + a.getTitle());
+        for (Artwork a : artworks) {
+            listModel.addElement(a.getId() + " - " + a.getTitle());
+        }
     }
     @Override public void artworkAdded(Artwork artwork) {
         listModel.addElement(artwork.getId() + " - " + artwork.getTitle());
         errorLabel.setText(" ");
-        titleTextField.setText(""); artistTextField.setText(""); priceTextField.setText("");
+        titleTextField.setText("");
+        artistTextField.setText("");
+        priceTextField.setText("");
     }
     @Override public void artworkRemoved(Artwork artwork) {
         listModel.removeElement(artwork.getId() + " - " + artwork.getTitle());
