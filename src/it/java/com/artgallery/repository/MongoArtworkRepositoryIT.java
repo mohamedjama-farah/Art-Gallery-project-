@@ -18,3 +18,24 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.bson.Document;
+
+@Testcontainers
+@DisplayName("MongoArtworkRepository Integration Tests")
+class MongoArtworkRepositoryIT {
+	@Container
+	static MongoDBContainer mongoContainer = new MongoDBContainer("mongo:6.0");
+
+	private MongoArtworkRepository repository;
+	private MongoClient mongoClient;
+
+	@BeforeAll
+	static void setupContainer() {
+		mongoContainer.start();
+	}
+
+	@BeforeEach
+	void setUp() {
+		mongoClient = MongoClients.create(mongoContainer.getReplicaSetUrl());
+		repository = new MongoArtworkRepository(mongoClient, "artgallery_test");
+		repository.findAll().forEach(a -> repository.delete(a.getId()));
+	}
