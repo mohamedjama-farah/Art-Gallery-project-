@@ -88,3 +88,8 @@ class ArtworkControllerTest {
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo("test-123");
     }
+    @Test void testGetArtworkByIdNotFoundThrowsException() {
+        when(mockRepository.findById("nonexistent")).thenReturn(Optional.empty());
+        assertThatThrownBy(() -> controller.getArtworkById("nonexistent"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
