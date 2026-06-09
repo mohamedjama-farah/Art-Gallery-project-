@@ -66,3 +66,16 @@ class MongoCategoryRepositoryIT {
 		assertThat(category.getId()).isNotNull();
 		assertThat(category.getId()).isNotEmpty();
 	}
+	@Test
+	@DisplayName("Should find category by ID")
+	void testFindCategoryById() {
+		Category category = new Category("Sculpture");
+		category.setDescription("Stone and bronze sculptures");
+		repository.save(category);
+
+		Category found = repository.findById(category.getId()).orElse(null);
+
+		assertThat(found).isNotNull();
+		assertThat(found.getName()).isEqualTo("Sculpture");
+		assertThat(found.getDescription()).isEqualTo("Stone and bronze sculptures");
+	}
