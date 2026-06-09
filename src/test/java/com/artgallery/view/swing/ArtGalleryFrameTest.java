@@ -304,3 +304,10 @@ public class ArtGalleryFrameTest {
     @Test public void testErrorLabelName() {
         assertThat(frame.errorLabel.getName()).isEqualTo("errorLabel");
     }
+    @Test public void testMultipleArtworksWithSameTitle() {
+        Artwork a1 = new Artwork("Same", "Artist1", 100.0);
+        Artwork a2 = new Artwork("Same", "Artist2", 200.0);
+        frame.artworkAdded(a1);
+        frame.artworkAdded(a2);
+        assertThat(frame.listModel.getSize()).isEqualTo(2);
+    }
