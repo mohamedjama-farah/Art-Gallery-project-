@@ -66,3 +66,8 @@ public class ArtGalleryFrameTest {
         frame.artworkRemoved(artwork);
         assertThat(frame.listModel.size()).isEqualTo(0);
     }
+    @Test public void testShowErrorDisplaysMessage() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        frame.showError("Already existing", artwork);
+        assertThat(frame.errorLabel.getText()).contains("Already existing");
+    }
