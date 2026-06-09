@@ -199,3 +199,15 @@ class ArtworkTest {
 		Artwork artwork = new Artwork("Test", "Artist", 0.0);
 		assertThat(artwork.getPrice()).isZero();
 	}
+	@Test
+	@DisplayName("Should have same hash for equal objects")
+	void testHashCodeConsistency() {
+		Artwork artwork1 = new Artwork("Test", "Artist", 100.0);
+		artwork1.setYear(2000);
+		artwork1.setDescription("Desc");
+		Artwork artwork2 = new Artwork("Test", "Artist", 100.0);
+		artwork2.setYear(2000);
+		artwork2.setDescription("Desc");
+		assertThat(artwork1.hashCode()).isEqualTo(artwork2.hashCode());
+	}
+}
