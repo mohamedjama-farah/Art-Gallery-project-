@@ -403,3 +403,22 @@ public class ArtGalleryFrameTest {
         frame.titleTextField.setText("Title");
         assertThat(frame.addButton.isEnabled()).isTrue();
     }
+    @Test public void testUpdateAddButtonMultipleChanges() {
+        frame.titleTextField.setText("A");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.titleTextField.setText("AB");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.titleTextField.setText("ABC");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.artistTextField.setText("Artist");
+        assertThat(frame.addButton.isEnabled()).isFalse();
+
+        frame.priceTextField.setText("50");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+
+        frame.priceTextField.setText("50.5");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
