@@ -54,3 +54,9 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.get(0)).contains("Starry Night");
         assertThat(frame.listModel.get(1)).contains("The Kiss");
     }
+    @Test public void testArtworkAddedAppendsToList() {
+        Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        frame.artworkAdded(artwork);
+        assertThat(frame.listModel.size()).isEqualTo(1);
+        assertThat(frame.listModel.get(0)).contains("Starry Night");
+    }
