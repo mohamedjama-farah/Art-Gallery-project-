@@ -147,3 +147,10 @@ public class ArtGalleryFrameTest {
         frame.artworkAdded(artwork);
         assertThat(frame.errorLabel.getText()).isEqualTo(" ");
     }
+    @Test public void testShowAllArtworksWithMultipleArtworks() {
+        Artwork a1 = new Artwork("A1", "Artist1", 100.0);
+        Artwork a2 = new Artwork("A2", "Artist2", 200.0);
+        Artwork a3 = new Artwork("A3", "Artist3", 300.0);
+        frame.showAllArtworks(Arrays.asList(a1, a2, a3));
+        assertThat(frame.listModel.size()).isEqualTo(3);
+    }
