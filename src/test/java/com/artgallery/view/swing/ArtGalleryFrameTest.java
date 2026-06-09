@@ -46,3 +46,11 @@ public class ArtGalleryFrameTest {
         frame.artistTextField.setText("Van Gogh");
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testShowAllArtworksPopulatesList() {
+        Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
+        frame.showAllArtworks(Arrays.asList(a1, a2));
+        assertThat(frame.listModel.size()).isEqualTo(2);
+        assertThat(frame.listModel.get(0)).contains("Starry Night");
+        assertThat(frame.listModel.get(1)).contains("The Kiss");
+    }
