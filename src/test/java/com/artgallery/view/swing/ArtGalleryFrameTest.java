@@ -163,3 +163,9 @@ public class ArtGalleryFrameTest {
         assertThat(frame.listModel.size()).isEqualTo(1);
         assertThat(frame.listModel.get(0)).contains("A2");
     }
+    @Test public void testAddButtonDisabledWhenPriceContainsText() {
+        frame.titleTextField.setText("Title");
+        frame.artistTextField.setText("Artist");
+        frame.priceTextField.setText("0.0");
+        assertThat(frame.addButton.isEnabled()).isTrue();
+    }
