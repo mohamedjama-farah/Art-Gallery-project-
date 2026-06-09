@@ -93,3 +93,12 @@ class ArtworkControllerTest {
         assertThatThrownBy(() -> controller.getArtworkById("nonexistent"))
             .isInstanceOf(IllegalArgumentException.class);
     }
+    @Test void testGetAllArtworksReturnsRepositoryList() {
+        Artwork a1 = new Artwork("A1", "Artist1", 100.0);
+        Artwork a2 = new Artwork("A2", "Artist2", 200.0);
+        List<Artwork> list = Arrays.asList(a1, a2);
+        when(mockRepository.findAll()).thenReturn(list);
+        List<Artwork> result = controller.getAllArtworks();
+        assertThat(result).hasSize(2);
+        assertThat(result).containsExactly(a1, a2);
+    }
