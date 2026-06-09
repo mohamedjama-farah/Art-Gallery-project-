@@ -30,3 +30,10 @@ class ArtworkTest {
 				.isInstanceOf(NullPointerException.class)
 				.hasMessage("Artist cannot be null");
 	}
+	@Test
+	@DisplayName("Should throw exception when price is negative")
+	void testArtworkNegativePrice() {
+		assertThatThrownBy(() -> new Artwork("Starry Night", "Van Gogh", -100.0))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Price cannot be negative");
+	}
