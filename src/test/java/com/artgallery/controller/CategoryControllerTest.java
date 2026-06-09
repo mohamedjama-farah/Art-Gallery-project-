@@ -32,3 +32,9 @@ class CategoryControllerTest {
             .isInstanceOf(NullPointerException.class)
             .hasMessage("Repository cannot be null");
     }
+    @Test
+    void testAddCategory() {
+        Category category = new Category("Painting");
+        controller.addCategory(category);
+        verify(mockRepository).save(category);
+    }
