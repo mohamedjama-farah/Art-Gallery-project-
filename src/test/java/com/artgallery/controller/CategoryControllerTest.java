@@ -144,3 +144,13 @@ class CategoryControllerTest {
         assertThat(result).hasSize(3);
         assertThat(result).containsExactlyElementsOf(cats);
     }
+    @Test
+    void testUpdateCategorySuccessfully() {
+        Category category = new Category("Modern");
+        category.setId("100");
+        when(mockRepository.findById("100")).thenReturn(Optional.of(category));
+
+        controller.updateCategory(category);
+
+        verify(mockRepository).update(category);
+    }
