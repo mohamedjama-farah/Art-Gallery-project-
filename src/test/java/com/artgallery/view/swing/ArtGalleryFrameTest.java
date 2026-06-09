@@ -211,3 +211,8 @@ public class ArtGalleryFrameTest {
     @Test public void testAddButtonInitiallyDisabled() {
         assertThat(frame.addButton.isEnabled()).isFalse();
     }
+    @Test public void testAllTextFieldsEmpty() {
+        assertThat(frame.titleTextField.getText()).isEmpty();
+        assertThat(frame.artistTextField.getText()).isEmpty();
+        assertThat(frame.priceTextField.getText()).isEmpty();
+    }
