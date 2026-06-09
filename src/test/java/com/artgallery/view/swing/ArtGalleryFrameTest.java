@@ -184,3 +184,9 @@ public class ArtGalleryFrameTest {
         assertThat(frame.artistTextField).isNotNull();
         assertThat(frame.priceTextField).isNotNull();
     }
+    @Test public void testShowAllArtworksWithSingleArtwork() {
+        Artwork a1 = new Artwork("Solo", "Artist", 150.0);
+        frame.showAllArtworks(Arrays.asList(a1));
+        assertThat(frame.listModel.size()).isEqualTo(1);
+        assertThat(frame.listModel.get(0)).contains("Solo");
+    }
