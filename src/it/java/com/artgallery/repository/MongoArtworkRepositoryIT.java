@@ -39,3 +39,12 @@ class MongoArtworkRepositoryIT {
 		repository = new MongoArtworkRepository(mongoClient, "artgallery_test");
 		repository.findAll().forEach(a -> repository.delete(a.getId()));
 	}
+	@Test
+	@DisplayName("Should create repository with single parameter constructor")
+	void testSingleParameterConstructor() {
+		MongoArtworkRepository singleParamRepo = new MongoArtworkRepository(mongoClient);
+		assertThat(singleParamRepo).isNotNull();
+		Artwork artwork = new Artwork("Test", "Artist", 100.0);
+		singleParamRepo.save(artwork);
+		assertThat(artwork.getId()).isNotNull();
+	}
