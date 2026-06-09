@@ -214,3 +214,17 @@ class MongoCategoryRepositoryIT {
 		assertThat(found).isNotNull();
 		assertThat(found.getDescription()).isNull();
 	}
+	@Test
+	@DisplayName("Should find all with multiple categories")
+	void testFindAllWithMultiple() {
+		Category c1 = new Category("Cat1");
+		Category c2 = new Category("Cat2");
+		Category c3 = new Category("Cat3");
+		repository.save(c1);
+		repository.save(c2);
+		repository.save(c3);
+
+		List<Category> all = repository.findAll();
+		assertThat(all).hasSize(3);
+		assertThat(all).extracting(Category::getName).contains("Cat1", "Cat2", "Cat3");
+	}
