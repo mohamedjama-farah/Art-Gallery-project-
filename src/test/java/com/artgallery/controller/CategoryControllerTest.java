@@ -132,3 +132,15 @@ class CategoryControllerTest {
         List<Category> result = controller.getAllCategories();
         assertThat(result).isEmpty();
     }
+    @Test
+    void testGetAllCategoriesReturnsMultiple() {
+        List<Category> cats = Arrays.asList(
+            new Category("Cat1"),
+            new Category("Cat2"),
+            new Category("Cat3")
+        );
+        when(mockRepository.findAll()).thenReturn(cats);
+        List<Category> result = controller.getAllCategories();
+        assertThat(result).hasSize(3);
+        assertThat(result).containsExactlyElementsOf(cats);
+    }
