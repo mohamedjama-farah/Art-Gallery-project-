@@ -49,3 +49,7 @@ class ArtworkControllerTest {
         verify(mockView).showError("Already existing artwork with id " + artwork.getId(), artwork);
         verifyNoMoreInteractions(mockView);
     }
+    @Test void testAddNullArtworkThrowsException() {
+        assertThatThrownBy(() -> controller.addArtwork(null))
+            .isInstanceOf(NullPointerException.class).hasMessage("Artwork cannot be null");
+    }
