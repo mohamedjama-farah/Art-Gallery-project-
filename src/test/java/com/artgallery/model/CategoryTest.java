@@ -102,3 +102,10 @@ class CategoryTest {
 		Category category = new Category("Modern Art");
 		assertThat(category.getDescription()).isNull();
 	}
+	@Test
+	@DisplayName("Should have different hashCode for different objects")
+	void testHashCodeDifference() {
+		Category category1 = new Category("Cat1");
+		Category category2 = new Category("Cat2");
+		assertThat(category1.hashCode()).isNotEqualTo(category2.hashCode());
+	}
