@@ -131,3 +131,10 @@ class CategoryTest {
 		category2.setDescription("Desc");
 		assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
 	}
+	@Test
+	@DisplayName("Should have toString with category name")
+	void testToStringContainsName() {
+		Category category = new Category("ImportantCategory");
+		String str = category.toString();
+		assertThat(str).contains("ImportantCategory");
+	}
