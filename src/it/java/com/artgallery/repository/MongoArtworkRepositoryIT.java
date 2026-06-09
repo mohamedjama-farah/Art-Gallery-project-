@@ -92,3 +92,17 @@ class MongoArtworkRepositoryIT {
 		assertThat(artwork.getId()).isNotNull();
 		assertThat(artwork.getId()).isNotEmpty();
 	}
+	@Test
+	@DisplayName("Should find artwork by ID")
+	void testFindArtworkById() {
+		Artwork artwork = new Artwork("Starry Night", "Van Gogh", 1000.0);
+		artwork.setYear(1889);
+		repository.save(artwork);
+
+		Artwork found = repository.findById(artwork.getId()).orElse(null);
+
+		assertThat(found).isNotNull();
+		assertThat(found.getTitle()).isEqualTo("Starry Night");
+		assertThat(found.getArtist()).isEqualTo("Van Gogh");
+		assertThat(found.getPrice()).isEqualTo(1000.0);
+	}
