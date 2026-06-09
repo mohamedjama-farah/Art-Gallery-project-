@@ -205,3 +205,6 @@ public class ArtGalleryFrameTest {
     @Test public void testListSelectionMode() {
         assertThat(frame.artworkList.getSelectionMode()).isEqualTo(0); // SINGLE_SELECTION = 0
     }
+    @Test public void testSetControllerCallsAllArtworks() {
+        verify(mockController).allArtworks();
+    }
