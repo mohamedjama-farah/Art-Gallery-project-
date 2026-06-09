@@ -37,3 +37,12 @@ class MongoCategoryRepositoryIT {
 		repository = new MongoCategoryRepository(mongoClient, "artgallery_test");
 		repository.findAll().forEach(c -> repository.delete(c.getId()));
 	}
+	@Test
+	@DisplayName("Should create repository with single parameter constructor")
+	void testSingleParameterConstructor() {
+		MongoCategoryRepository singleParamRepo = new MongoCategoryRepository(mongoClient);
+		assertThat(singleParamRepo).isNotNull();
+		Category category = new Category("Test Category");
+		singleParamRepo.save(category);
+		assertThat(category.getId()).isNotNull();
+	}
