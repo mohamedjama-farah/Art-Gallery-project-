@@ -222,12 +222,9 @@
 				<configuration>
 					<targetClasses>
 						<param>com.artgallery.controller.*</param>
-						<param>com.artgallery.repository.*</param>
-						<param>com.artgallery.view.swing.ArtGalleryFrame</param>
 					</targetClasses>
 					<excludedClasses>
 						<param>com.artgallery.ArtGalleryApp</param>
-						<param>com.artgallery.view.swing.ArtGalleryApp</param>
 					</excludedClasses>
 				</configuration>
 			</plugin>
