@@ -8,11 +8,12 @@
 ## Build
 mvn clean verify
 
+Note: Only the Docker daemon must be running. Testcontainers automatically manages MongoDB containers during the build. No manual Docker setup is required.
+
 ## Run GUI
-Start MongoDB: docker start mymongo
-Run app: mvn exec:java -Dexec.mainClass=com.artgallery.ArtGalleryApp -DskipTests
+Start Docker daemon, then:
+docker run -d -p 27017:27017 --name mymongo mongo:6.0
+mvn exec:java -Dexec.mainClass=com.artgallery.ArtGalleryApp -DskipTests
 
 Unit tests: src/test/java
 Integration/E2E tests: src/it/java
-
-Note: Docker must be running before mvn clean verify
