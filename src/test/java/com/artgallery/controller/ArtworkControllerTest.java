@@ -157,4 +157,28 @@ class ArtworkControllerTest {
         verify(mockRepository).save(artwork);
         verify(mockView).artworkAdded(artwork);
     }
+    @Test
+    void testGetArtworksByCategoryCallsShowAllArtworks() {
+        Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        a1.setCategoryId("cat1");
+        Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
+        a2.setCategoryId("cat1");
+        when(mockRepository.findByCategory("cat1")).thenReturn(Arrays.asList(a1, a2));
+        controller.getArtworksByCategory("cat1");
+        verify(mockView).showAllArtworks(Arrays.asList(a1, a2));
+    }
+
+    @Test
+    void testGetArtworksByCategoryWithNullThrows() {
+        assertThatThrownBy(() -> controller.getArtworksByCategory(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void testGetArtworksByCategoryReturnsEmpty() {
+        when(mockRepository.findByCategory("unknown")).thenReturn(Arrays.asList());
+        controller.getArtworksByCategory("unknown");
+        verify(mockView).showAllArtworks(Arrays.asList());
+    }
+
 }

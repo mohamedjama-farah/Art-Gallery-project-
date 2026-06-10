@@ -17,6 +17,7 @@ public class Artwork {
 	private double price;
 	private int year;
 	private String description;
+	private String categoryId;
 
 	/**
 	 * Creates a new Artwork with title, artist, and price.
@@ -109,6 +110,22 @@ public class Artwork {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * Returns the category ID of this artwork.
+	 * @return category ID, or null if not set
+	 */
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	/**
+	 * Sets the category ID of this artwork.
+	 * @param categoryId the category ID
+	 */
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	/**

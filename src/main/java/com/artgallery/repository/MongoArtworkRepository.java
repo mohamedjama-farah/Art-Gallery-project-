@@ -112,6 +112,20 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		}
 	}
 
+	/**
+	 * Finds all artworks belonging to a category.
+	 * @param categoryId the category ID (non-null)
+	 * @return list of artworks with that category
+	 */
+	@Override
+	public List<Artwork> findByCategory(String categoryId) {
+		Objects.requireNonNull(categoryId, "Category ID cannot be null");
+		List<Artwork> artworks = new ArrayList<>();
+		collection.find(Filters.eq("categoryId", categoryId))
+				.forEach(doc -> artworks.add(documentToArtwork(doc)));
+		return artworks;
+	}
+
 	private Document artworkToDocument(Artwork artwork) {
 		Document doc = new Document();
 		doc.put("title", artwork.getTitle());
@@ -119,6 +133,7 @@ public class MongoArtworkRepository implements ArtworkRepository {
 		doc.put("price", artwork.getPrice());
 		doc.put("year", artwork.getYear());
 		doc.put("description", artwork.getDescription());
+		doc.put("categoryId", artwork.getCategoryId());
 		return doc;
 	}
 
@@ -130,6 +145,7 @@ public class MongoArtworkRepository implements ArtworkRepository {
 			artwork.setYear(year);
 		}
 		artwork.setDescription(doc.getString("description"));
+		artwork.setCategoryId(doc.getString("categoryId"));
 		return artwork;
 	}
 }

@@ -91,4 +91,13 @@ public class ArtworkController {
         }
         repository.update(artwork);
     }
+
+    /**
+     * Displays all artworks belonging to a category.
+     * @param categoryId the category ID (non-null)
+     */
+    public void getArtworksByCategory(String categoryId) {
+        Objects.requireNonNull(categoryId, "Category ID cannot be null");
+        view.showAllArtworks(repository.findByCategory(categoryId));
+    }
 }

@@ -39,4 +39,11 @@ public interface ArtworkRepository {
 	 * @param artwork the artwork to update (non-null)
 	 */
 	void update(Artwork artwork);
+
+	/**
+	 * Finds all artworks belonging to a category.
+	 * @param categoryId the category ID (non-null)
+	 * @return list of artworks with that category
+	 */
+	List<Artwork> findByCategory(String categoryId);
 }
