@@ -24,25 +24,20 @@ class ArtGalleryFrameTest {
         frame = new ArtGalleryFrame();
         frame.setController(mockController);
     }
-    @Test void testAddButtonIsEnabledWhenAllFieldsFilled() {
-        frame.titleTextField.setText("Starry Night");
-        frame.artistTextField.setText("Van Gogh");
-        frame.priceTextField.setText("1000.0");
-        assertThat(frame.addButton.isEnabled()).isTrue();
-    }
     @ParameterizedTest
-    @MethodSource("provideDisabledButtonCases")
-    void testAddButtonDisabledWhenFieldMissing(String title, String artist, String price) {
+    @MethodSource("provideButtonStateCases")
+    void testAddButtonState(String title, String artist, String price, boolean expected) {
         frame.titleTextField.setText(title);
         frame.artistTextField.setText(artist);
         frame.priceTextField.setText(price);
-        assertThat(frame.addButton.isEnabled()).isFalse();
+        assertThat(frame.addButton.isEnabled()).isEqualTo(expected);
     }
-    static Stream<Arguments> provideDisabledButtonCases() {
+    static Stream<Arguments> provideButtonStateCases() {
         return Stream.of(
-            Arguments.of("", "Van Gogh", "1000.0"),
-            Arguments.of("Starry Night", "", "1000.0"),
-            Arguments.of("Starry Night", "Van Gogh", "")
+            Arguments.of("Starry Night", "Van Gogh", "1000.0", true),
+            Arguments.of("", "Van Gogh", "1000.0", false),
+            Arguments.of("Starry Night", "", "1000.0", false),
+            Arguments.of("Starry Night", "Van Gogh", "", false)
         );
     }
     @Test void testShowAllArtworksPopulatesList() {
@@ -304,14 +299,6 @@ class ArtGalleryFrameTest {
         assertThat(frame.errorLabel.getText()).contains("Error 1");
         frame.showError("Error 2", null);
         assertThat(frame.errorLabel.getText()).contains("Error 2");
-    }
-    @ParameterizedTest
-    @MethodSource("provideFieldValidationCases")
-    void testFieldValidationDisablesButton(String title, String artist, String price) {
-        frame.titleTextField.setText(title);
-        frame.artistTextField.setText(artist);
-        frame.priceTextField.setText(price);
-        assertThat(frame.addButton.isEnabled()).isFalse();
     }
     static Stream<Arguments> provideFieldValidationCases() {
         return Stream.of(
