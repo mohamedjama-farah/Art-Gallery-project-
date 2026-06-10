@@ -189,7 +189,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
     public void showAllArtworks(List<Artwork> artworks) {
         listModel.clear();
         for (Artwork a : artworks) {
-            listModel.addElement(a.getId() + " - " + a.getTitle());
+            listModel.addElement(a.getId() + " - " + a.getTitle() + " (" + a.getArtist() + ") " + a.getPrice() + "€");
         }
     }
 
@@ -199,7 +199,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
      */
     @Override
     public void artworkAdded(Artwork artwork) {
-        listModel.addElement(artwork.getId() + " - " + artwork.getTitle());
+        listModel.addElement(artwork.getId() + " - " + artwork.getTitle() + " (" + artwork.getArtist() + ") " + artwork.getPrice() + "€");
         errorLabel.setText(" ");
         titleTextField.setText("");
         artistTextField.setText("");
@@ -212,7 +212,7 @@ public class ArtGalleryFrame extends JFrame implements ArtGalleryView {
      */
     @Override
     public void artworkRemoved(Artwork artwork) {
-        listModel.removeElement(artwork.getId() + " - " + artwork.getTitle());
+        listModel.removeElement(artwork.getId() + " - " + artwork.getTitle() + " (" + artwork.getArtist() + ") " + artwork.getPrice() + "€");
         errorLabel.setText(" ");
     }
 
