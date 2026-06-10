@@ -305,4 +305,44 @@ class MongoArtworkRepositoryIT {
 		// When year is null, setYear should not be called, year defaults to 0
 		assertThat(found.getYear()).isZero();
 	}
+    @Test
+    void testFindByCategoryReturnsMatchingArtworks() {
+        Artwork a1 = new Artwork("Starry Night", "Van Gogh", 1000.0);
+        a1.setCategoryId("paintings");
+        Artwork a2 = new Artwork("The Kiss", "Klimt", 2000.0);
+        a2.setCategoryId("paintings");
+        Artwork a3 = new Artwork("Rodin Thinker", "Rodin", 500.0);
+        a3.setCategoryId("sculpture");
+        repository.save(a1);
+        repository.save(a2);
+        repository.save(a3);
+        List<Artwork> result = repository.findByCategory("paintings");
+        assertThat(result).hasSize(2);
+        assertThat(result).extracting(Artwork::getCategoryId).containsOnly("paintings");
+    }
+
+    @Test
+    void testFindByCategoryReturnsEmptyWhenNoMatch() {
+        Artwork a = new Artwork("Title", "Artist", 100.0);
+        a.setCategoryId("sculpture");
+        repository.save(a);
+        List<Artwork> result = repository.findByCategory("paintings");
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void testFindByCategoryWithNullThrows() {
+        assertThatThrownBy(() -> repository.findByCategory(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void testCategoryIdPersistedAndLoaded() {
+        Artwork artwork = new Artwork("Title", "Artist", 100.0);
+        artwork.setCategoryId("cat-42");
+        repository.save(artwork);
+        Artwork loaded = repository.findById(artwork.getId()).get();
+        assertThat(loaded.getCategoryId()).isEqualTo("cat-42");
+    }
+
 }

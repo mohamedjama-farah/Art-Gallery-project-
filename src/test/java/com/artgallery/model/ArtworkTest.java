@@ -210,4 +210,25 @@ class ArtworkTest {
 		artwork2.setDescription("Desc");
 		assertThat(artwork1).hasSameHashCodeAs(artwork2);
 	}
+    @Test
+    void testCategoryIdIsNullByDefault() {
+        Artwork artwork = new Artwork("Title", "Artist", 100.0);
+        assertThat(artwork.getCategoryId()).isNull();
+    }
+
+    @Test
+    void testSetAndGetCategoryId() {
+        Artwork artwork = new Artwork("Title", "Artist", 100.0);
+        artwork.setCategoryId("cat-123");
+        assertThat(artwork.getCategoryId()).isEqualTo("cat-123");
+    }
+
+    @Test
+    void testSetCategoryIdToNull() {
+        Artwork artwork = new Artwork("Title", "Artist", 100.0);
+        artwork.setCategoryId("cat-123");
+        artwork.setCategoryId(null);
+        assertThat(artwork.getCategoryId()).isNull();
+    }
+
 }
